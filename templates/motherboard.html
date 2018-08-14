@@ -1,0 +1,113 @@
+{% extends "main.html" %}
+{% load replace get_by_key %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+{% block scripts %}
+    {% csrf_token %}
+
+{% include "my_js.html" %}
+{% endblock %}
+
+{% block content %}
+
+    <!-- ========================= SECTION CONTENT ========================= -->
+    <section class="section-content bg padding-y">
+        <div class="container">
+
+            <div class="row">
+                <aside class="col-sm-3">
+                    {% include "socket.html" %}
+                  {% for title, values in dict_key_value.items %}
+                    <div class="card card-filter">
+                        <article class="card-group-item">
+                            <header class="card-header">
+                                <a class="" aria-expanded="true" href="#" data-toggle="collapse"
+                                   data-target="#collapse_{{ title }}">
+                                    <i class="icon-action fa fa-chevron-down"></i>
+                                    <h6 class="title">{{ translate|get_by_key:title|capfirst }}</h6>
+                                </a>
+                            </header>
+                            <div style="" class="filter-content collapse show" id="collapse_{{ title }}">
+                                <div class="card-body">
+
+                                    <ul class="list-unstyled list-lg">
+                                        <div class="list-group list-group-flush">
+                                            <div class="checkbox checkbox-warning man">
+                                                {% for filter in values %}
+                                                    <li>
+
+                                                        <input id="check_{{ filter|underline }}"
+                                                               type="checkbox"
+                                                               class="styled" unchecked>
+                                                        <label for="check_{{ filter|underline }}">
+                                                            {{ filter|capfirst }}
+                                                        </label>
+
+                                                    </li>
+                                                {% endfor %}
+                                            </div>
+
+                                        </div>
+                                    </ul>
+                                </div> <!-- card-body.// -->
+                            </div> <!-- collapse .// -->
+                        </article> <!-- card-group-item.// -->
+                    </div>
+                    {% endfor %}
+
+
+                    {% include "price_range.html" %}
+                    <div class="card card-filter">
+                        <article class="card-group-item">
+                            <header class="card-header">
+                                <a class="" aria-expanded="true" href="#" data-toggle="collapse"
+                                   data-target="#collapse1111">
+                                    <i class="icon-action fa fa-chevron-down"></i>
+                                    <h6 class="title">Страна-производитель</h6>
+                                </a>
+                            </header>
+                            <div style="" class="filter-content collapse show" id="collapse1111">
+                                <div class="card-body">
+
+
+                                    <ul class="list-unstyled list-lg">
+                                        <div class="list-group list-group-flush">
+                                            <div class="checkbox checkbox-warning thread">
+                                                {% for y in threads %}
+
+                                                    <li>
+
+                                                        <input id="check_thread_{{ y.0|underline }}"
+                                                               type="checkbox"
+                                                               class="styled" unchecked>
+                                                        <label for="check_thread_{{ y.0|underline }}">
+                                                            {{ y.0 }}
+                                                        </label>
+
+                                                    </li>
+                                                {% endfor %}
+                                            </div>
+
+                                        </div>
+                                    </ul>
+                                </div> <!-- card-body.// -->
+                            </div> <!-- collapse .// -->
+                        </article> <!-- card-group-item.// -->
+                    </div> <!-- card.// -->
+                </aside> <!-- col.// -->
+                <main class="col-sm-9">
+                {% include "sort.html" %}
+                    <div class="row">
+                        {% include "motherboard_items.html" %}
+                    </div> <!-- row.// -->
+
+                </main> <!-- col.// -->
+            </div>
+
+        </div> <!-- container .//  -->
+    </section>
+    <!-- ========================= SECTION CONTENT END// ========================= -->
+
+{% endblock %}

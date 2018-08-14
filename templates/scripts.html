@@ -1,0 +1,615 @@
+<link rel="stylesheet" id="font-awesome-css" href="{% static "hom2_files/A_010.css"%}" type="text/css" media="all">
+    <script type="text/javascript" src="{% static "hom2_files/core.js" %}"></script>
+    <script type="text/javascript" src="{% static "hom2_files/effect.js" %}"></script>
+    <script type="text/javascript"
+            src="data:text/javascript,!function(a)%7B%22function%22%3D%3Dtypeof%20define%26%26define.amd%3Fdefine(%5B%22jquery%22%2C%22.%2Feffect%22%5D%2Ca)%3Aa(jQuery)%7D(function(a)%7Breturn%20a.effects.effect.drop%3Dfunction(b%2Cc)%7Bvar%20d%2Ce%3Da(this)%2Cf%3D%5B%22position%22%2C%22top%22%2C%22bottom%22%2C%22left%22%2C%22right%22%2C%22opacity%22%2C%22height%22%2C%22width%22%5D%2Cg%3Da.effects.setMode(e%2Cb.mode%7C%7C%22hide%22)%2Ch%3D%22show%22%3D%3D%3Dg%2Ci%3Db.direction%7C%7C%22left%22%2Cj%3D%22up%22%3D%3D%3Di%7C%7C%22down%22%3D%3D%3Di%3F%22top%22%3A%22left%22%2Ck%3D%22up%22%3D%3D%3Di%7C%7C%22left%22%3D%3D%3Di%3F%22pos%22%3A%22neg%22%2Cl%3D%7Bopacity%3Ah%3F1%3A0%7D%3Ba.effects.save(e%2Cf)%2Ce.show()%2Ca.effects.createWrapper(e)%2Cd%3Db.distance%7C%7Ce%5B%22top%22%3D%3D%3Dj%3F%22outerHeight%22%3A%22outerWidth%22%5D(!0)%2F2%2Ch%26%26e.css(%22opacity%22%2C0).css(j%2C%22pos%22%3D%3D%3Dk%3F-d%3Ad)%2Cl%5Bj%5D%3D(h%3F%22pos%22%3D%3D%3Dk%3F%22%2B%3D%22%3A%22-%3D%22%3A%22pos%22%3D%3D%3Dk%3F%22-%3D%22%3A%22%2B%3D%22)%2Bd%2Ce.animate(l%2C%7Bqueue%3A!1%2Cduration%3Ab.duration%2Ceasing%3Ab.easing%2Ccomplete%3Afunction()%7B%22hide%22%3D%3D%3Dg%26%26e.hide()%2Ca.effects.restore(e%2Cf)%2Ca.effects.removeWrapper(e)%2Cc()%7D%7D)%7D%7D)%3B">!function (a) {
+        "function" == typeof
+
+            define && define.amd ? define(["jquery", "./effect"], a) : a(jQuery)
+    }(function (a) {
+        return
+        a.effects.effect.drop = function (b, c) {
+            var
+                d, e = a(this), f = ["position", "top", "bottom", "left", "right", "opacity", "height", "width"], g = a.effects.setMode(e, b.mode || "hide"), h = "show" === g, i = b.direction || "left", j = "up" === i || "down" === i ? "top" : "left", k = "up" === i || "left" === i ? "pos" : "neg", l = {opacity: h ? 1 : 0};
+            a.effects.save(e, f), e.show(), a.effects.createWrapper(e), d = b.distance || e["top" === j ? "outerHeight" : "outerWidth"](!0) / 2, h && e.css("opacity", 0).css(j, "pos" === k ? -d : d), l[j] = (h ? "pos" === k ? "+=" : "-=" : "pos" === k ? "-=" : "+=") + d, e.animate(l, {
+                queue: !1,
+                duration: b.duration,
+                easing: b.easing,
+                complete: function () {
+                    "hide" === g && e.hide(), a.effects.restore(e, f), a.effects.removeWrapper(e), c()
+                }
+            })
+        }
+    });</script>
+    <script type="text/javascript"
+            src="data:text/javascript,!function(a)%7B%22function%22%3D%3Dtypeof%20define%26%26define.amd%3Fdefine(%5B%22jquery%22%2C%22.%2Feffect%22%5D%2Ca)%3Aa(jQuery)%7D(function(a)%7Breturn%20a.effects.effect.fade%3Dfunction(b%2Cc)%7Bvar%20d%3Da(this)%2Ce%3Da.effects.setMode(d%2Cb.mode%7C%7C%22toggle%22)%3Bd.animate(%7Bopacity%3Ae%7D%2C%7Bqueue%3A!1%2Cduration%3Ab.duration%2Ceasing%3Ab.easing%2Ccomplete%3Ac%7D)%7D%7D)%3B">!function (a) {
+        "function" == typeof
+
+            define && define.amd ? define(["jquery", "./effect"], a) : a(jQuery)
+    }(function (a) {
+        return
+        a.effects.effect.fade = function (b, c) {
+            var
+                d = a(this), e = a.effects.setMode(d, b.mode || "toggle");
+            d.animate({opacity: e}, {queue: !1, duration: b.duration, easing: b.easing, complete: c})
+        }
+    });</script>
+    <script type="text/javascript" src="{% static "hom2_files/jquery_ui_effect-slide.js" %}"></script>
+    <script type="text/javascript"
+            src="data:text/javascript,eval(mod_pagespeed_YkbAd_BkXv)%3B">eval(mod_pagespeed_YkbAd_BkXv);</script>
+    <script type="text/javascript"
+            src="data:text/javascript,eval(mod_pagespeed_aR3dA613tt)%3B">eval(mod_pagespeed_aR3dA613tt);</script>
+    <script type="text/javascript"
+            src="data:text/javascript,var%20wpcf7%3D%7B%22apiSettings%22%3A%7B%22root%22%3A%22https%3A%5C%2F%5C%2Fwww.primeabgb.com%5C%2Fwp-json%5C%2Fcontact-form-7%5C%2Fv1%22%2C%22namespace%22%3A%22contact-form-7%5C%2Fv1%22%7D%2C%22recaptcha%22%3A%7B%22messages%22%3A%7B%22empty%22%3A%22Please%20verify%20that%20you%20are%20not%20a%20robot.%22%7D%7D%2C%22cached%22%3A%221%22%7D%3B">var
+
+        wpcf7 = {
+            "apiSettings": {
+                "root": "https:\/\/www.primeabgb.com\/wp-json\/contact-form-7\/v1",
+                "namespace": "contact-form-7\/v1"
+            }, "recaptcha": {
+                "messages": {
+                    "empty": "Please verify that you are not a robot."}},"cached":"1"};</script>
+    <script type="text/javascript" src="{% static "hom2_files/scripts.js" %}"></script>
+    <script type="text/javascript" src="{% static "hom2_files/widget.js" %}"></script>
+    <script type="text/javascript" src="{% static "hom2_files/mouse.js" %}"></script>
+    <script type="text/javascript" src="{% static "hom2_files/accordion.js" %}"></script>
+    <script type="text/javascript"
+            src="data:text/javascript,eval(mod_pagespeed_inCc8v6X1X)%3B">eval(mod_pagespeed_inCc8v6X1X);</script>
+    <script type="text/javascript"
+            src="data:text/javascript,eval(mod_pagespeed_Q4hIW_h_zT)%3B">eval(mod_pagespeed_Q4hIW_h_zT);</script>
+    <script type="text/javascript" src="{% static "hom2_files/menu.js" %}"></script>
+    <script type="text/javascript"
+            src="data:text/javascript,window.wp%3Dwindow.wp%7C%7C%7B%7D%2Cfunction(a%2Cb)%7B%22use%20strict%22%3Bfunction%20c(a%2Cc)%7Be()%2Ca%3Db(%22%3Cp%3E%22).html(a).text()%2Ch%3D%3D%3Da%26%26(a%2B%3D%22%5Cxa0%22)%2Ch%3Da%2Cg%26%26%22assertive%22%3D%3D%3Dc%3Fg.text(a)%3Af%26%26f.text(a)%7Dfunction%20d(a)%7Ba%3Da%7C%7C%22polite%22%3Bvar%20c%3Db(%22%3Cdiv%3E%22%2C%7Bid%3A%22wp-a11y-speak-%22%2Ba%2C%22aria-live%22%3Aa%2C%22aria-relevant%22%3A%22additions%20text%22%2C%22aria-atomic%22%3A%22true%22%2C%22class%22%3A%22screen-reader-text%20wp-a11y-speak-region%22%7D)%3Breturn%20b(document.body).append(c)%2Cc%7Dfunction%20e()%7Bb(%22.wp-a11y-speak-region%22).text(%22%22)%7Dvar%20f%2Cg%2Ch%3D%22%22%3Bb(document).ready(function()%7Bf%3Db(%22%23wp-a11y-speak-polite%22)%2Cg%3Db(%22%23wp-a11y-speak-assertive%22)%2Cf.length%7C%7C(f%3Dd(%22polite%22))%2Cg.length%7C%7C(g%3Dd(%22assertive%22))%7D)%2Ca.a11y%3Da.a11y%7C%7C%7B%7D%2Ca.a11y.speak%3Dc%7D(window.wp%2Cwindow.jQuery)%3B">window.wp = window.wp || {}, function (a, b) {
+        "use\
+        strict\
+        ";function
+        c(a, c)
+        {
+            e(), a = b("<p>").html(a).text(), h === a && (a += "\xa0"), h = a, g && "assertive" === c ? g.text(a) : f && f.text(a)
+        }
+        function
+        d(a) {
+            a = a || "polite";
+            var
+                c = b("<div>", {
+                    id: "wp-a11y-speak-" + a, "aria-live": a, "aria-relevant": "additions\
+                    text","aria-atomic":"true","class":"screen - reader - text\
+                    wp-a11y - speak - region"});return b(document.body).append(c),c}function
+                        e()
+            {
+                b(".wp-a11y-speak-region").text("")
+            }
+            var
+                f, g, h = "";
+            b(document).ready(function () {
+                f = b("#wp-a11y-speak-polite"), g = b("#wp-a11y-speak-assertive"), f.length || (f = d("polite")), g.length || (g = d("assertive"))
+            }), a.a11y = a.a11y || {}, a.a11y.speak = c
+        }
+            (window.wp, window.jQuery);</script>
+    <script type="text/javascript"
+            src="data:text/javascript,var%20uiAutocompleteL10n%3D%7B%22noResults%22%3A%22No%20results%20found.%22%2C%22oneResult%22%3A%221%20result%20found.%20Use%20up%20and%20down%20arrow%20keys%20to%20navigate.%22%2C%22manyResults%22%3A%22%25d%20results%20found.%20Use%20up%20and%20down%20arrow%20keys%20to%20navigate.%22%2C%22itemSelected%22%3A%22Item%20selected.%22%7D%3B">var
+        uiAutocompleteL10n = {
+            "noResults": "No results found.", "oneResult": "1\
+            result found.Use up and down arrow keys to navigate.\
+    ","\
+    manyResults\
+    \
+    ":" % d\
+    results\
+    found.Use\
+    up\
+    and\
+    down\
+    arrow\
+    keys\
+    to\
+    navigate.\
+    \
+    ","\
+    itemSelected\
+    ":"\
+    Item\
+    selected.\
+    "};</script>
+    <script type="text/javascript" src="{% static "hom2_files/autocomplete.js" %}"></script>
+    <script type="text/javascript"
+            src="data:text/javascript,eval(mod_pagespeed_Br4kiUcXST)%3B">eval(mod_pagespeed_Br4kiUcXST);</script>
+    <script type="text/javascript"
+            src="data:text/javascript,eval(mod_pagespeed_H8tKwH_fci)%3B">eval(mod_pagespeed_H8tKwH_fci);</script>
+    <script type="text/javascript"
+            src="data:text/javascript,eval(mod_pagespeed_1rqb20NVAB)%3B">eval(mod_pagespeed_1rqb20NVAB);</script>
+    <script type="text/javascript" src="{% static "hom2_files/sortable.js" %}"></script>
+    <script type="text/javascript" src="{% static "hom2_files/draggable.js" %}"></script>
+    <script type="text/javascript" src="{% static "hom2_files/droppable.js" %}"></script>
+    <script type="text/javascript" src="{% static "hom2_files/selectable.js" %}"></script>
+    <script type="text/javascript" src="{% static "hom2_files/datepicker.js" %}"></script>
+    <script type="text/javascript"
+            src="data:text/javascript,jQuery(document).ready(function(jQuery)%7BjQuery.datepicker.setDefaults(%7B%22closeText%22%3A%22Close%22%2C%22currentText%22%3A%22Today%22%2C%22monthNames%22%3A%5B%22January%22%2C%22February%22%2C%22March%22%2C%22April%22%2C%22May%22%2C%22June%22%2C%22July%22%2C%22August%22%2C%22September%22%2C%22October%22%2C%22November%22%2C%22December%22%5D%2C%22monthNamesShort%22%3A%5B%22Jan%22%2C%22Feb%22%2C%22Mar%22%2C%22Apr%22%2C%22May%22%2C%22Jun%22%2C%22Jul%22%2C%22Aug%22%2C%22Sep%22%2C%22Oct%22%2C%22Nov%22%2C%22Dec%22%5D%2C%22nextText%22%3A%22Next%22%2C%22prevText%22%3A%22Previous%22%2C%22dayNames%22%3A%5B%22Sunday%22%2C%22Monday%22%2C%22Tuesday%22%2C%22Wednesday%22%2C%22Thursday%22%2C%22Friday%22%2C%22Saturday%22%5D%2C%22dayNamesShort%22%3A%5B%22Sun%22%2C%22Mon%22%2C%22Tue%22%2C%22Wed%22%2C%22Thu%22%2C%22Fri%22%2C%22Sat%22%5D%2C%22dayNamesMin%22%3A%5B%22S%22%2C%22M%22%2C%22T%22%2C%22W%22%2C%22T%22%2C%22F%22%2C%22S%22%5D%2C%22dateFormat%22%3A%22MM%20d%2C%20yy%22%2C%22firstDay%22%3A1%2C%22isRTL%22%3Afalse%7D)%3B%7D)%3B">jQuery(document).ready(function (jQuery) {
+        jQuery.datepicker.setDefaults({
+            "closeText": "Close",
+            "currentText": "Today",
+            "monthNames": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+            "monthNamesShort": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+            "nextText": "Next",
+            "prevText": "Previous",
+            "dayNames": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+            "dayNamesShort": ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+            "dayNamesMin": ["S", "M", "T", "W", "T", "F", "S"],
+            "dateFormat": "MM\
+            d,\
+            yy","\
+            firstDay":1,"\
+            isRTL":false});});</script>
+    <script type="text/javascript" src="{% static "hom2_files/resizable.js" %}"></script>
+    <script type="text/javascript" src="{% static "hom2_files/button.js" %}"></script>
+    <script type="text/javascript" src="{% static "hom2_files/dialog.js" %}"></script>
+    <script type="text/javascript" src="{% static "hom2_files/jquery_jquery.js" %}"></script>
+    <script type="text/javascript"
+            src="data:text/javascript,eval(mod_pagespeed_orMG3GE%24j3)%3B">eval(mod_pagespeed_orMG3GE$j3);</script>
+    <script type="text/javascript"
+            src="data:text/javascript,eval(mod_pagespeed_kGJteVIS4P)%3B">eval(mod_pagespeed_kGJteVIS4P);</script>
+    <script type="text/javascript"
+            src="data:text/javascript,eval(mod_pagespeed_1TO76nL5wo)%3B">eval(mod_pagespeed_1TO76nL5wo);</script>
+    <script type="text/javascript"
+            src="data:text/javascript,eval(mod_pagespeed_nl4gFTV31o)%3B">eval(mod_pagespeed_nl4gFTV31o);</script>
+    <script type="text/javascript"
+            src="data:text/javascript,!function(a)%7B%22use%20strict%22%3Bvar%20b%3Da.Masonry%3Bb.prototype._remapV2Options%3Dfunction()%7Bthis._remapOption(%22gutterWidth%22%2C%22gutter%22)%2Cthis._remapOption(%22isResizable%22%2C%22isResizeBound%22)%2Cthis._remapOption(%22isRTL%22%2C%22isOriginLeft%22%2Cfunction(a)%7Breturn!a%7D)%3Bvar%20a%3Dthis.options.isAnimated%3Bif(void%200!%3D%3Da%26%26(this.options.transitionDuration%3Da%3Fthis.options.transitionDuration%3A0)%2Cvoid%200%3D%3D%3Da%7C%7Ca)%7Bvar%20b%3Dthis.options.animationOptions%2Cc%3Db%26%26b.duration%3Bc%26%26(this.options.transitionDuration%3D%22string%22%3D%3Dtypeof%20c%3Fc%3Ac%2B%22ms%22)%7D%7D%2Cb.prototype._remapOption%3Dfunction(a%2Cb%2Cc)%7Bvar%20d%3Dthis.options%5Ba%5D%3Bvoid%200!%3D%3Dd%26%26(this.options%5Bb%5D%3Dc%3Fc(d)%3Ad)%7D%3Bvar%20c%3Db.prototype._create%3Bb.prototype._create%3Dfunction()%7Bvar%20a%3Dthis%3Bthis._remapV2Options()%2Cc.apply(this%2Carguments)%2CsetTimeout(function()%7BjQuery(a.element).addClass(%22masonry%22)%7D%2C0)%7D%3Bvar%20d%3Db.prototype.layout%3Bb.prototype.layout%3Dfunction()%7Bthis._remapV2Options()%2Cd.apply(this%2Carguments)%7D%3Bvar%20e%3Db.prototype.option%3Bb.prototype.option%3Dfunction()%7Be.apply(this%2Carguments)%2Cthis._remapV2Options()%7D%3Bvar%20f%3Db.prototype._itemize%3Bb.prototype._itemize%3Dfunction(a)%7Bvar%20b%3Df.apply(this%2Carguments)%3Breturn%20jQuery(a).addClass(%22masonry-brick%22)%2Cb%7D%3Bvar%20g%3Db.prototype.measureColumns%3Bb.prototype.measureColumns%3Dfunction()%7Bvar%20a%3Dthis.options.columnWidth%3Ba%26%26%22function%22%3D%3Dtypeof%20a%26%26(this.getContainerWidth()%2Cthis.columnWidth%3Da(this.containerWidth))%2Cg.apply(this%2Carguments)%7D%2Cb.prototype.reload%3Dfunction()%7Bthis.reloadItems.apply(this%2Carguments)%2Cthis.layout.apply(this)%7D%3Bvar%20h%3Db.prototype.destroy%3Bb.prototype.destroy%3Dfunction()%7Bvar%20a%3Dthis.getItemElements()%3BjQuery(this.element).removeClass(%22masonry%22)%2CjQuery(a).removeClass(%22masonry-brick%22)%2Ch.apply(this%2Carguments)%7D%7D(window)%3B">!function (a) {
+        "use\
+        strict\
+        ";var
+        b = a.Masonry;
+        b.prototype._remapV2Options = function () {
+            this._remapOption("gutterWidth", "gutter"), this._remapOption("isResizable", "isResizeBound"), this._remapOption("isRTL", "isOriginLeft", function (a) {
+                return !a
+            });
+            var
+                a = this.options.isAnimated;
+            if (void
+                    0 !== a && (this.options.transitionDuration = a ? this.options.transitionDuration : 0), void
+                    0 === a || a) {
+                var
+                    b = this.options.animationOptions, c = b && b.duration;
+                c && (this.options.transitionDuration = "string" == typeof
+                    c ? c : c + "ms")
+            }
+        }, b.prototype._remapOption = function (a, b, c) {
+            var
+                d = this.options[a];
+            void 0 !== d && (this.options[b] = c ? c(d) : d)
+        };
+        var
+            c = b.prototype._create;
+        b.prototype._create = function () {
+            var
+                a = this;
+            this._remapV2Options(), c.apply(this, arguments), setTimeout(function () {
+                jQuery(a.element).addClass("masonry")
+            }, 0)
+        };
+        var
+
+            d = b.prototype.layout;
+        b.prototype.layout = function () {
+            this._remapV2Options(), d.apply(this, arguments)
+        };
+        var
+
+            e = b.prototype.option;
+        b.prototype.option = function () {
+            e.apply(this, arguments), this._remapV2Options()
+        };
+        var
+            f = b.prototype._itemize;
+        b.prototype._itemize = function (a) {
+            var
+                b = f.apply(this, arguments);
+            return
+            jQuery(a).addClass("masonry-brick"), b
+        };
+        var
+            g = b.prototype.measureColumns;
+        b.prototype.measureColumns = function () {
+            var
+                a = this.options.columnWidth;
+            a && "function" == typeof
+                a && (this.getContainerWidth(), this.columnWidth = a(this.containerWidth)), g.apply(this, arguments)
+        }, b.prototype.reload = function () {
+            this.reloadItems.apply(this, arguments), this.layout.apply(this)
+        };
+        var
+            h = b.prototype.destroy;
+        b.prototype.destroy = function () {
+            var
+                a = this.getItemElements();
+            jQuery(this.element).removeClass("masonry"), jQuery(a).removeClass("masonry-brick"), h.apply(this, arguments)
+        }
+    }(window);</script>
+    <script type="text/javascript" src="{% static "hom2_files/progressbar.js" %}"></script>
+    <script type="text/javascript" src="{% static "hom2_files/tooltip.js" %}"></script>
+    <script type="text/javascript"
+            src="data:text/javascript,!function(a)%7B%22function%22%3D%3Dtypeof%20define%26%26define.amd%3Fdefine(%5B%22jquery%22%2C%22.%2Feffect%22%5D%2Ca)%3Aa(jQuery)%7D(function(a)%7Breturn%20a.effects.effect.blind%3Dfunction(b%2Cc)%7Bvar%20d%2Ce%2Cf%2Cg%3Da(this)%2Ch%3D%2Fup%7Cdown%7Cvertical%2F%2Ci%3D%2Fup%7Cleft%7Cvertical%7Chorizontal%2F%2Cj%3D%5B%22position%22%2C%22top%22%2C%22bottom%22%2C%22left%22%2C%22right%22%2C%22height%22%2C%22width%22%5D%2Ck%3Da.effects.setMode(g%2Cb.mode%7C%7C%22hide%22)%2Cl%3Db.direction%7C%7C%22up%22%2Cm%3Dh.test(l)%2Cn%3Dm%3F%22height%22%3A%22width%22%2Co%3Dm%3F%22top%22%3A%22left%22%2Cp%3Di.test(l)%2Cq%3D%7B%7D%2Cr%3D%22show%22%3D%3D%3Dk%3Bg.parent().is(%22.ui-effects-wrapper%22)%3Fa.effects.save(g.parent()%2Cj)%3Aa.effects.save(g%2Cj)%2Cg.show()%2Cd%3Da.effects.createWrapper(g).css(%7Boverflow%3A%22hidden%22%7D)%2Ce%3Dd%5Bn%5D()%2Cf%3DparseFloat(d.css(o))%7C%7C0%2Cq%5Bn%5D%3Dr%3Fe%3A0%2Cp%7C%7C(g.css(m%3F%22bottom%22%3A%22right%22%2C0).css(m%3F%22top%22%3A%22left%22%2C%22auto%22).css(%7Bposition%3A%22absolute%22%7D)%2Cq%5Bo%5D%3Dr%3Ff%3Ae%2Bf)%2Cr%26%26(d.css(n%2C0)%2Cp%7C%7Cd.css(o%2Cf%2Be))%2Cd.animate(q%2C%7Bduration%3Ab.duration%2Ceasing%3Ab.easing%2Cqueue%3A!1%2Ccomplete%3Afunction()%7B%22hide%22%3D%3D%3Dk%26%26g.hide()%2Ca.effects.restore(g%2Cj)%2Ca.effects.removeWrapper(g)%2Cc()%7D%7D)%7D%7D)%3B">!function (a) {
+        "function" == typeof
+
+            define && define.amd ? define(["jquery", "./effect"], a) : a(jQuery)
+    }(function (a) {
+        return
+        a.effects.effect.blind = function (b, c) {
+            var
+                d, e, f, g = a(this), h = /up|down|vertical/, i = /up|left|vertical|horizontal/, j = ["position", "top", "bottom", "left", "right", "height", "width"], k = a.effects.setMode(g, b.mode || "hide"), l = b.direction || "up", m = h.test(l), n = m ? "height" : "width", o = m ? "top" : "left", p = i.test(l), q = {}, r = "show" === k;
+            g.parent().is(".ui-effects-wrapper") ? a.effects.save(g.parent(), j) : a.effects.save(g, j), g.show(), d = a.effects.createWrapper(g).css({overflow: "hidden"}), e = d[n](), f = parseFloat(d.css(o)) || 0, q[n] = r ? e : 0, p || (g.css(m ? "bottom" : "right", 0).css(m ? "top" : "left", "auto").css({position: "absolute"}), q[o] = r ? f : e + f), r && (d.css(n, 0), p || d.css(o, f + e)), d.animate(q, {
+                duration: b.duration,
+                easing: b.easing,
+                queue: !1,
+                complete: function () {
+                    "hide" === k && g.hide(), a.effects.restore(g, j), a.effects.removeWrapper(g), c()
+                }
+            })
+        }
+    });</script>
+    <script type="text/javascript"
+            src="data:text/javascript,!function(a)%7B%22function%22%3D%3Dtypeof%20define%26%26define.amd%3Fdefine(%5B%22jquery%22%2C%22.%2Feffect%22%5D%2Ca)%3Aa(jQuery)%7D(function(a)%7Breturn%20a.effects.effect.bounce%3Dfunction(b%2Cc)%7Bvar%20d%2Ce%2Cf%2Cg%3Da(this)%2Ch%3D%5B%22position%22%2C%22top%22%2C%22bottom%22%2C%22left%22%2C%22right%22%2C%22height%22%2C%22width%22%5D%2Ci%3Da.effects.setMode(g%2Cb.mode%7C%7C%22effect%22)%2Cj%3D%22hide%22%3D%3D%3Di%2Ck%3D%22show%22%3D%3D%3Di%2Cl%3Db.direction%7C%7C%22up%22%2Cm%3Db.distance%2Cn%3Db.times%7C%7C5%2Co%3D2*n%2B(k%7C%7Cj%3F1%3A0)%2Cp%3Db.duration%2Fo%2Cq%3Db.easing%2Cr%3D%22up%22%3D%3D%3Dl%7C%7C%22down%22%3D%3D%3Dl%3F%22top%22%3A%22left%22%2Cs%3D%22up%22%3D%3D%3Dl%7C%7C%22left%22%3D%3D%3Dl%2Ct%3Dg.queue()%2Cu%3Dt.length%3Bfor((k%7C%7Cj)%26%26h.push(%22opacity%22)%2Ca.effects.save(g%2Ch)%2Cg.show()%2Ca.effects.createWrapper(g)%2Cm%7C%7C(m%3Dg%5B%22top%22%3D%3D%3Dr%3F%22outerHeight%22%3A%22outerWidth%22%5D()%2F3)%2Ck%26%26(f%3D%7Bopacity%3A1%7D%2Cf%5Br%5D%3D0%2Cg.css(%22opacity%22%2C0).css(r%2Cs%3F2*-m%3A2*m).animate(f%2Cp%2Cq))%2Cj%26%26(m%2F%3DMath.pow(2%2Cn-1))%2Cf%3D%7B%7D%2Cf%5Br%5D%3D0%2Cd%3D0%3Bd%3Cn%3Bd%2B%2B)e%3D%7B%7D%2Ce%5Br%5D%3D(s%3F%22-%3D%22%3A%22%2B%3D%22)%2Bm%2Cg.animate(e%2Cp%2Cq).animate(f%2Cp%2Cq)%2Cm%3Dj%3F2*m%3Am%2F2%3Bj%26%26(e%3D%7Bopacity%3A0%7D%2Ce%5Br%5D%3D(s%3F%22-%3D%22%3A%22%2B%3D%22)%2Bm%2Cg.animate(e%2Cp%2Cq))%2Cg.queue(function()%7Bj%26%26g.hide()%2Ca.effects.restore(g%2Ch)%2Ca.effects.removeWrapper(g)%2Cc()%7D)%2Cu%3E1%26%26t.splice.apply(t%2C%5B1%2C0%5D.concat(t.splice(u%2Co%2B1)))%2Cg.dequeue()%7D%7D)%3B">!function (a) {
+        "function" == typeof
+
+            define && define.amd ? define(["jquery", "./effect"], a) : a(jQuery)
+    }(function (a) {
+        return
+        a.effects.effect.bounce = function (b, c) {
+            var
+                d, e, f, g = a(this), h = ["position", "top", "bottom", "left", "right", "height", "width"], i = a.effects.setMode(g, b.mode || "effect"), j = "hide" === i, k = "show" === i, l = b.direction || "up", m = b.distance, n = b.times || 5, o = 2 * n + (k || j ? 1 : 0), p = b.duration / o, q = b.easing, r = "up" === l || "down" === l ? "top" : "left", s = "up" === l || "left" === l, t = g.queue(), u = t.length;
+            for ((k || j) && h.push("opacity"), a.effects.save(g, h), g.show(), a.effects.createWrapper(g), m || (m = g["top" === r ? "outerHeight" : "outerWidth"]() / 3), k && (f = {opacity: 1}, f[r] = 0, g.css("opacity", 0).css(r, s ? 2 * -m : 2 * m).animate(f, p, q)), j && (m /= Math.pow(2, n - 1)), f = {}, f[r] = 0, d = 0; d < n; d++)e = {}, e[r] = (s ? "-=" : "+=") + m, g.animate(e, p, q).animate(f, p, q), m = j ? 2 * m : m / 2;
+            j && (e = {opacity: 0}, e[r] = (s ? "-=" : "+=") + m, g.animate(e, p, q)), g.queue(function () {
+                j && g.hide(), a.effects.restore(g, h), a.effects.removeWrapper(g), c()
+            }), u > 1 && t.splice.apply(t, [1, 0].concat(t.splice(u, o + 1))), g.dequeue()
+        }
+    });</script>
+    <script type="text/javascript"
+            src="data:text/javascript,!function(a)%7B%22function%22%3D%3Dtypeof%20define%26%26define.amd%3Fdefine(%5B%22jquery%22%2C%22.%2Feffect%22%5D%2Ca)%3Aa(jQuery)%7D(function(a)%7Breturn%20a.effects.effect.clip%3Dfunction(b%2Cc)%7Bvar%20d%2Ce%2Cf%2Cg%3Da(this)%2Ch%3D%5B%22position%22%2C%22top%22%2C%22bottom%22%2C%22left%22%2C%22right%22%2C%22height%22%2C%22width%22%5D%2Ci%3Da.effects.setMode(g%2Cb.mode%7C%7C%22hide%22)%2Cj%3D%22show%22%3D%3D%3Di%2Ck%3Db.direction%7C%7C%22vertical%22%2Cl%3D%22vertical%22%3D%3D%3Dk%2Cm%3Dl%3F%22height%22%3A%22width%22%2Cn%3Dl%3F%22top%22%3A%22left%22%2Co%3D%7B%7D%3Ba.effects.save(g%2Ch)%2Cg.show()%2Cd%3Da.effects.createWrapper(g).css(%7Boverflow%3A%22hidden%22%7D)%2Ce%3D%22IMG%22%3D%3D%3Dg%5B0%5D.tagName%3Fd%3Ag%2Cf%3De%5Bm%5D()%2Cj%26%26(e.css(m%2C0)%2Ce.css(n%2Cf%2F2))%2Co%5Bm%5D%3Dj%3Ff%3A0%2Co%5Bn%5D%3Dj%3F0%3Af%2F2%2Ce.animate(o%2C%7Bqueue%3A!1%2Cduration%3Ab.duration%2Ceasing%3Ab.easing%2Ccomplete%3Afunction()%7Bj%7C%7Cg.hide()%2Ca.effects.restore(g%2Ch)%2Ca.effects.removeWrapper(g)%2Cc()%7D%7D)%7D%7D)%3B">!function (a) {
+        "function" == typeof
+
+            define && define.amd ? define(["jquery", "./effect"], a) : a(jQuery)
+    }(function (a) {
+        return
+        a.effects.effect.clip = function (b, c) {
+            var
+                d, e, f, g = a(this), h = ["position", "top", "bottom", "left", "right", "height", "width"], i = a.effects.setMode(g, b.mode || "hide"), j = "show" === i, k = b.direction || "vertical", l = "vertical" === k, m = l ? "height" : "width", n = l ? "top" : "left", o = {};
+            a.effects.save(g, h), g.show(), d = a.effects.createWrapper(g).css({overflow: "hidden"}), e = "IMG" === g[0].tagName ? d : g, f = e[m](), j && (e.css(m, 0), e.css(n, f / 2)), o[m] = j ? f : 0, o[n] = j ? 0 : f / 2, e.animate(o, {
+                queue: !1,
+                duration: b.duration,
+                easing: b.easing,
+                complete: function () {
+                    j || g.hide(), a.effects.restore(g, h), a.effects.removeWrapper(g), c()
+                }
+            })
+        }
+    });</script>
+    <script type="text/javascript"
+            src="data:text/javascript,!function(a)%7B%22function%22%3D%3Dtypeof%20define%26%26define.amd%3Fdefine(%5B%22jquery%22%2C%22.%2Feffect%22%5D%2Ca)%3Aa(jQuery)%7D(function(a)%7Breturn%20a.effects.effect.explode%3Dfunction(b%2Cc)%7Bfunction%20d()%7Bt.push(this)%2Ct.length%3D%3D%3Dl*m%26%26e()%7Dfunction%20e()%7Bn.css(%7Bvisibility%3A%22visible%22%7D)%2Ca(t).remove()%2Cp%7C%7Cn.hide()%2Cc()%7Dvar%20f%2Cg%2Ch%2Ci%2Cj%2Ck%2Cl%3Db.pieces%3FMath.round(Math.sqrt(b.pieces))%3A3%2Cm%3Dl%2Cn%3Da(this)%2Co%3Da.effects.setMode(n%2Cb.mode%7C%7C%22hide%22)%2Cp%3D%22show%22%3D%3D%3Do%2Cq%3Dn.show().css(%22visibility%22%2C%22hidden%22).offset()%2Cr%3DMath.ceil(n.outerWidth()%2Fm)%2Cs%3DMath.ceil(n.outerHeight()%2Fl)%2Ct%3D%5B%5D%3Bfor(f%3D0%3Bf%3Cl%3Bf%2B%2B)for(i%3Dq.top%2Bf*s%2Ck%3Df-(l-1)%2F2%2Cg%3D0%3Bg%3Cm%3Bg%2B%2B)h%3Dq.left%2Bg*r%2Cj%3Dg-(m-1)%2F2%2Cn.clone().appendTo(%22body%22).wrap(%22%3Cdiv%3E%3C%2Fdiv%3E%22).css(%7Bposition%3A%22absolute%22%2Cvisibility%3A%22visible%22%2Cleft%3A-g*r%2Ctop%3A-f*s%7D).parent().addClass(%22ui-effects-explode%22).css(%7Bposition%3A%22absolute%22%2Coverflow%3A%22hidden%22%2Cwidth%3Ar%2Cheight%3As%2Cleft%3Ah%2B(p%3Fj*r%3A0)%2Ctop%3Ai%2B(p%3Fk*s%3A0)%2Copacity%3Ap%3F0%3A1%7D).animate(%7Bleft%3Ah%2B(p%3F0%3Aj*r)%2Ctop%3Ai%2B(p%3F0%3Ak*s)%2Copacity%3Ap%3F1%3A0%7D%2Cb.duration%7C%7C500%2Cb.easing%2Cd)%7D%7D)%3B">!function (a) {
+        "function" == typeof
+
+            define && define.amd ? define(["jquery", "./effect"], a) : a(jQuery)
+    }(function (a) {
+        return
+        a.effects.effect.explode = function (b, c) {
+            function
+            d() {
+                t.push(this), t.length === l * m && e()
+            }
+
+            function
+            e() {
+                n.css({visibility: "visible"}), a(t).remove(), p || n.hide(), c()
+            }
+
+            var
+                f, g, h, i, j, k, l = b.pieces ? Math.round(Math.sqrt(b.pieces)) : 3, m = l, n = a(this), o = a.effects.setMode(n, b.mode || "hide"), p = "show" === o, q = n.show().css("visibility", "hidden").offset(), r = Math.ceil(n.outerWidth() / m), s = Math.ceil(n.outerHeight() / l), t = [];
+            for (f = 0; f < l; f++)for (i = q.top + f * s, k = f - (l - 1) / 2, g = 0; g < m; g++)h = q.left + g * r, j = g - (m - 1) / 2, n.clone().appendTo("body").wrap("<div></div>").css({
+                position: "absolute",
+                visibility: "visible",
+                left: -g * r,
+                top: -f * s
+            }).parent().addClass("ui-effects-explode").css({
+                position: "absolute",
+                overflow: "hidden",
+                width: r,
+                height: s,
+                left: h + (p ? j * r : 0),
+                top: i + (p ? k * s : 0),
+                opacity: p ? 0 : 1
+            }).animate({
+                left: h + (p ? 0 : j * r),
+                top: i + (p ? 0 : k * s),
+                opacity: p ? 1 : 0
+            }, b.duration || 500, b.easing, d)
+        }
+    });</script>
+    <script type="text/javascript"
+            src="data:text/javascript,!function(a)%7B%22function%22%3D%3Dtypeof%20define%26%26define.amd%3Fdefine(%5B%22jquery%22%2C%22.%2Feffect%22%5D%2Ca)%3Aa(jQuery)%7D(function(a)%7Breturn%20a.effects.effect.fold%3Dfunction(b%2Cc)%7Bvar%20d%2Ce%2Cf%3Da(this)%2Cg%3D%5B%22position%22%2C%22top%22%2C%22bottom%22%2C%22left%22%2C%22right%22%2C%22height%22%2C%22width%22%5D%2Ch%3Da.effects.setMode(f%2Cb.mode%7C%7C%22hide%22)%2Ci%3D%22show%22%3D%3D%3Dh%2Cj%3D%22hide%22%3D%3D%3Dh%2Ck%3Db.size%7C%7C15%2Cl%3D%2F(%5B0-9%5D%2B)%25%2F.exec(k)%2Cm%3D!!b.horizFirst%2Cn%3Di!%3D%3Dm%2Co%3Dn%3F%5B%22width%22%2C%22height%22%5D%3A%5B%22height%22%2C%22width%22%5D%2Cp%3Db.duration%2F2%2Cq%3D%7B%7D%2Cr%3D%7B%7D%3Ba.effects.save(f%2Cg)%2Cf.show()%2Cd%3Da.effects.createWrapper(f).css(%7Boverflow%3A%22hidden%22%7D)%2Ce%3Dn%3F%5Bd.width()%2Cd.height()%5D%3A%5Bd.height()%2Cd.width()%5D%2Cl%26%26(k%3DparseInt(l%5B1%5D%2C10)%2F100*e%5Bj%3F0%3A1%5D)%2Ci%26%26d.css(m%3F%7Bheight%3A0%2Cwidth%3Ak%7D%3A%7Bheight%3Ak%2Cwidth%3A0%7D)%2Cq%5Bo%5B0%5D%5D%3Di%3Fe%5B0%5D%3Ak%2Cr%5Bo%5B1%5D%5D%3Di%3Fe%5B1%5D%3A0%2Cd.animate(q%2Cp%2Cb.easing).animate(r%2Cp%2Cb.easing%2Cfunction()%7Bj%26%26f.hide()%2Ca.effects.restore(f%2Cg)%2Ca.effects.removeWrapper(f)%2Cc()%7D)%7D%7D)%3B">!function (a) {
+        "function" == typeof
+
+            define && define.amd ? define(["jquery", "./effect"], a) : a(jQuery)
+    }(function (a) {
+        return
+        a.effects.effect.fold = function (b, c) {
+            var
+                d, e, f = a(this), g = ["position", "top", "bottom", "left", "right", "height", "width"], h = a.effects.setMode(f, b.mode || "hide"), i = "show" === h, j = "hide" === h, k = b.size || 15, l = /([0-9]+)%/.exec(k), m = !!b.horizFirst, n = i !== m, o = n ? ["width", "height"] : ["height", "width"], p = b.duration / 2, q = {}, r = {};
+            a.effects.save(f, g), f.show(), d = a.effects.createWrapper(f).css({overflow: "hidden"}), e = n ? [d.width(), d.height()] : [d.height(), d.width()], l && (k = parseInt(l[1], 10) / 100 * e[j ? 0 : 1]), i && d.css(m ? {
+                    height: 0,
+                    width: k
+                } : {
+                    height: k,
+                    width: 0
+                }), q[o[0]] = i ? e[0] : k, r[o[1]] = i ? e[1] : 0, d.animate(q, p, b.easing).animate(r, p, b.easing, function () {
+                j && f.hide(), a.effects.restore(f, g), a.effects.removeWrapper(f), c()
+            })
+        }
+    });</script>
+    <script type="text/javascript"
+            src="data:text/javascript,!function(a)%7B%22function%22%3D%3Dtypeof%20define%26%26define.amd%3Fdefine(%5B%22jquery%22%2C%22.%2Feffect%22%5D%2Ca)%3Aa(jQuery)%7D(function(a)%7Breturn%20a.effects.effect.highlight%3Dfunction(b%2Cc)%7Bvar%20d%3Da(this)%2Ce%3D%5B%22backgroundImage%22%2C%22backgroundColor%22%2C%22opacity%22%5D%2Cf%3Da.effects.setMode(d%2Cb.mode%7C%7C%22show%22)%2Cg%3D%7BbackgroundColor%3Ad.css(%22backgroundColor%22)%7D%3B%22hide%22%3D%3D%3Df%26%26(g.opacity%3D0)%2Ca.effects.save(d%2Ce)%2Cd.show().css(%7BbackgroundImage%3A%22none%22%2CbackgroundColor%3Ab.color%7C%7C%22%23ffff99%22%7D).animate(g%2C%7Bqueue%3A!1%2Cduration%3Ab.duration%2Ceasing%3Ab.easing%2Ccomplete%3Afunction()%7B%22hide%22%3D%3D%3Df%26%26d.hide()%2Ca.effects.restore(d%2Ce)%2Cc()%7D%7D)%7D%7D)%3B">!function (a) {
+        "function" == typeof
+
+            define && define.amd ? define(["jquery", "./effect"], a) : a(jQuery)
+    }(function (a) {
+        return
+        a.effects.effect.highlight = function (b, c) {
+            var
+                d = a(this), e = ["backgroundImage", "backgroundColor", "opacity"], f = a.effects.setMode(d, b.mode || "show"), g = {backgroundColor: d.css("backgroundColor")};
+            "hide" === f && (g.opacity = 0), a.effects.save(d, e), d.show().css({
+                backgroundImage: "none",
+                backgroundColor: b.color || "#ffff99"
+            }).animate(g, {
+                queue: !1, duration: b.duration, easing: b.easing, complete: function () {
+                    "hide" === f && d.hide(), a.effects.restore(d, e), c()
+                }
+            })
+        }
+    });</script>
+    <script type="text/javascript"
+            src="data:text/javascript,!function(a)%7B%22function%22%3D%3Dtypeof%20define%26%26define.amd%3Fdefine(%5B%22jquery%22%2C%22.%2Feffect%22%5D%2Ca)%3Aa(jQuery)%7D(function(a)%7Breturn%20a.effects.effect.pulsate%3Dfunction(b%2Cc)%7Bvar%20d%2Ce%3Da(this)%2Cf%3Da.effects.setMode(e%2Cb.mode%7C%7C%22show%22)%2Cg%3D%22show%22%3D%3D%3Df%2Ch%3D%22hide%22%3D%3D%3Df%2Ci%3Dg%7C%7C%22hide%22%3D%3D%3Df%2Cj%3D2*(b.times%7C%7C5)%2B(i%3F1%3A0)%2Ck%3Db.duration%2Fj%2Cl%3D0%2Cm%3De.queue()%2Cn%3Dm.length%3Bfor(!g%26%26e.is(%22%3Avisible%22)%7C%7C(e.css(%22opacity%22%2C0).show()%2Cl%3D1)%2Cd%3D1%3Bd%3Cj%3Bd%2B%2B)e.animate(%7Bopacity%3Al%7D%2Ck%2Cb.easing)%2Cl%3D1-l%3Be.animate(%7Bopacity%3Al%7D%2Ck%2Cb.easing)%2Ce.queue(function()%7Bh%26%26e.hide()%2Cc()%7D)%2Cn%3E1%26%26m.splice.apply(m%2C%5B1%2C0%5D.concat(m.splice(n%2Cj%2B1)))%2Ce.dequeue()%7D%7D)%3B">!function (a) {
+        "function" == typeof
+
+            define && define.amd ? define(["jquery", "./effect"], a) : a(jQuery)
+    }(function (a) {
+        return
+        a.effects.effect.pulsate = function (b, c) {
+            var
+                d, e = a(this), f = a.effects.setMode(e, b.mode || "show"), g = "show" === f, h = "hide" === f, i = g || "hide" === f, j = 2 * (b.times || 5) + (i ? 1 : 0), k = b.duration / j, l = 0, m = e.queue(), n = m.length;
+            for (!g && e.is(":visible") || (e.css("opacity", 0).show(), l = 1), d = 1; d < j; d++)e.animate({opacity: l}, k, b.easing), l = 1 - l;
+            e.animate({opacity: l}, k, b.easing), e.queue(function () {
+                h && e.hide(), c()
+            }), n > 1 && m.splice.apply(m, [1, 0].concat(m.splice(n, j + 1))), e.dequeue()
+        }
+    });</script>
+    <script type="text/javascript" src="{% static "hom2_files/effect-size.js"%}"></script>
+    <script type="text/javascript"
+            src="data:text/javascript,!function(a)%7B%22function%22%3D%3Dtypeof%20define%26%26define.amd%3Fdefine(%5B%22jquery%22%2C%22.%2Feffect%22%2C%22.%2Feffect-size%22%5D%2Ca)%3Aa(jQuery)%7D(function(a)%7Breturn%20a.effects.effect.scale%3Dfunction(b%2Cc)%7Bvar%20d%3Da(this)%2Ce%3Da.extend(!0%2C%7B%7D%2Cb)%2Cf%3Da.effects.setMode(d%2Cb.mode%7C%7C%22effect%22)%2Cg%3DparseInt(b.percent%2C10)%7C%7C(0%3D%3D%3DparseInt(b.percent%2C10)%3F0%3A%22hide%22%3D%3D%3Df%3F0%3A100)%2Ch%3Db.direction%7C%7C%22both%22%2Ci%3Db.origin%2Cj%3D%7Bheight%3Ad.height()%2Cwidth%3Ad.width()%2CouterHeight%3Ad.outerHeight()%2CouterWidth%3Ad.outerWidth()%7D%2Ck%3D%7By%3A%22horizontal%22!%3D%3Dh%3Fg%2F100%3A1%2Cx%3A%22vertical%22!%3D%3Dh%3Fg%2F100%3A1%7D%3Be.effect%3D%22size%22%2Ce.queue%3D!1%2Ce.complete%3Dc%2C%22effect%22!%3D%3Df%26%26(e.origin%3Di%7C%7C%5B%22middle%22%2C%22center%22%5D%2Ce.restore%3D!0)%2Ce.from%3Db.from%7C%7C(%22show%22%3D%3D%3Df%3F%7Bheight%3A0%2Cwidth%3A0%2CouterHeight%3A0%2CouterWidth%3A0%7D%3Aj)%2Ce.to%3D%7Bheight%3Aj.height*k.y%2Cwidth%3Aj.width*k.x%2CouterHeight%3Aj.outerHeight*k.y%2CouterWidth%3Aj.outerWidth*k.x%7D%2Ce.fade%26%26(%22show%22%3D%3D%3Df%26%26(e.from.opacity%3D0%2Ce.to.opacity%3D1)%2C%22hide%22%3D%3D%3Df%26%26(e.from.opacity%3D1%2Ce.to.opacity%3D0))%2Cd.effect(e)%7D%7D)%3B">!function (a) {
+        "function" == typeof
+
+            define && define.amd ? define(["jquery", "./effect", "./effect-size"], a) : a(jQuery)
+    }(function (a) {
+        return
+        a.effects.effect.scale = function (b, c) {
+            var
+                d = a(this), e = a.extend(!0, {}, b), f = a.effects.setMode(d, b.mode || "effect"), g = parseInt(b.percent, 10) || (0 === parseInt(b.percent, 10) ? 0 : "hide" === f ? 0 : 100), h = b.direction || "both", i = b.origin, j = {
+                    height: d.height(),
+                    width: d.width(),
+                    outerHeight: d.outerHeight(),
+                    outerWidth: d.outerWidth()
+                }, k = {y: "horizontal" !== h ? g / 100 : 1, x: "vertical" !== h ? g / 100 : 1};
+            e.effect = "size", e.queue = !1, e.complete = c, "effect" !== f && (e.origin = i || ["middle", "center"], e.restore = !0), e.from = b.from || ("show" === f ? {
+                        height: 0,
+                        width: 0,
+                        outerHeight: 0,
+                        outerWidth: 0
+                    } : j), e.to = {
+                height: j.height * k.y,
+                width: j.width * k.x,
+                outerHeight: j.outerHeight * k.y,
+                outerWidth: j.outerWidth * k.x
+            }, e.fade && ("show" === f && (e.from.opacity = 0, e.to.opacity = 1), "hide" === f && (e.from.opacity = 1, e.to.opacity = 0)), d.effect(e)
+        }
+    });</script>
+    <script type="text/javascript"
+            src="data:text/javascript,!function(a)%7B%22function%22%3D%3Dtypeof%20define%26%26define.amd%3Fdefine(%5B%22jquery%22%2C%22.%2Feffect%22%5D%2Ca)%3Aa(jQuery)%7D(function(a)%7Breturn%20a.effects.effect.shake%3Dfunction(b%2Cc)%7Bvar%20d%2Ce%3Da(this)%2Cf%3D%5B%22position%22%2C%22top%22%2C%22bottom%22%2C%22left%22%2C%22right%22%2C%22height%22%2C%22width%22%5D%2Cg%3Da.effects.setMode(e%2Cb.mode%7C%7C%22effect%22)%2Ch%3Db.direction%7C%7C%22left%22%2Ci%3Db.distance%7C%7C20%2Cj%3Db.times%7C%7C3%2Ck%3D2*j%2B1%2Cl%3DMath.round(b.duration%2Fk)%2Cm%3D%22up%22%3D%3D%3Dh%7C%7C%22down%22%3D%3D%3Dh%3F%22top%22%3A%22left%22%2Cn%3D%22up%22%3D%3D%3Dh%7C%7C%22left%22%3D%3D%3Dh%2Co%3D%7B%7D%2Cp%3D%7B%7D%2Cq%3D%7B%7D%2Cr%3De.queue()%2Cs%3Dr.length%3Bfor(a.effects.save(e%2Cf)%2Ce.show()%2Ca.effects.createWrapper(e)%2Co%5Bm%5D%3D(n%3F%22-%3D%22%3A%22%2B%3D%22)%2Bi%2Cp%5Bm%5D%3D(n%3F%22%2B%3D%22%3A%22-%3D%22)%2B2*i%2Cq%5Bm%5D%3D(n%3F%22-%3D%22%3A%22%2B%3D%22)%2B2*i%2Ce.animate(o%2Cl%2Cb.easing)%2Cd%3D1%3Bd%3Cj%3Bd%2B%2B)e.animate(p%2Cl%2Cb.easing).animate(q%2Cl%2Cb.easing)%3Be.animate(p%2Cl%2Cb.easing).animate(o%2Cl%2F2%2Cb.easing).queue(function()%7B%22hide%22%3D%3D%3Dg%26%26e.hide()%2Ca.effects.restore(e%2Cf)%2Ca.effects.removeWrapper(e)%2Cc()%7D)%2Cs%3E1%26%26r.splice.apply(r%2C%5B1%2C0%5D.concat(r.splice(s%2Ck%2B1)))%2Ce.dequeue()%7D%7D)%3B">!function (a) {
+        "function" == typeof
+
+            define && define.amd ? define(["jquery", "./effect"], a) : a(jQuery)
+    }(function (a) {
+        return
+        a.effects.effect.shake = function (b, c) {
+            var
+                d, e = a(this), f = ["position", "top", "bottom", "left", "right", "height", "width"], g = a.effects.setMode(e, b.mode || "effect"), h = b.direction || "left", i = b.distance || 20, j = b.times || 3, k = 2 * j + 1, l = Math.round(b.duration / k), m = "up" === h || "down" === h ? "top" : "left", n = "up" === h || "left" === h, o = {}, p = {}, q = {}, r = e.queue(), s = r.length;
+            for (a.effects.save(e, f), e.show(), a.effects.createWrapper(e), o[m] = (n ? "-=" : "+=") + i, p[m] = (n ? "+=" : "-=") + 2 * i, q[m] = (n ? "-=" : "+=") + 2 * i, e.animate(o, l, b.easing), d = 1; d < j; d++)e.animate(p, l, b.easing).animate(q, l, b.easing);
+            e.animate(p, l, b.easing).animate(o, l / 2, b.easing).queue(function () {
+                "hide" === g && e.hide(), a.effects.restore(e, f), a.effects.removeWrapper(e), c()
+            }), s > 1 && r.splice.apply(r, [1, 0].concat(r.splice(s, k + 1))), e.dequeue()
+        }
+    });</script>
+    <script type="text/javascript"
+            src="data:text/javascript,!function(a)%7B%22function%22%3D%3Dtypeof%20define%26%26define.amd%3Fdefine(%5B%22jquery%22%2C%22.%2Feffect%22%5D%2Ca)%3Aa(jQuery)%7D(function(a)%7Breturn%20a.effects.effect.transfer%3Dfunction(b%2Cc)%7Bvar%20d%3Da(this)%2Ce%3Da(b.to)%2Cf%3D%22fixed%22%3D%3D%3De.css(%22position%22)%2Cg%3Da(%22body%22)%2Ch%3Df%3Fg.scrollTop()%3A0%2Ci%3Df%3Fg.scrollLeft()%3A0%2Cj%3De.offset()%2Ck%3D%7Btop%3Aj.top-h%2Cleft%3Aj.left-i%2Cheight%3Ae.innerHeight()%2Cwidth%3Ae.innerWidth()%7D%2Cl%3Dd.offset()%2Cm%3Da(%22%3Cdiv%20class%3D'ui-effects-transfer'%3E%3C%2Fdiv%3E%22).appendTo(document.body).addClass(b.className).css(%7Btop%3Al.top-h%2Cleft%3Al.left-i%2Cheight%3Ad.innerHeight()%2Cwidth%3Ad.innerWidth()%2Cposition%3Af%3F%22fixed%22%3A%22absolute%22%7D).animate(k%2Cb.duration%2Cb.easing%2Cfunction()%7Bm.remove()%2Cc()%7D)%7D%7D)%3B">!function (a) {
+        "function" == typeof
+
+            define && define.amd ? define(["jquery", "./effect"], a) : a(jQuery)
+    }(function (a) {
+        return
+        a.effects.effect.transfer = function (b, c) {
+            var
+                d = a(this), e = a(b.to), f = "fixed" === e.css("position"), g = a("body"), h = f ? g.scrollTop() : 0, i = f ? g.scrollLeft() : 0, j = e.offset(), k = {
+                    top: j.top - h,
+                    left: j.left - i,
+                    height: e.innerHeight(),
+                    width: e.innerWidth()
+                }, l = d.offset(), m = a("<div class = 'ui-effects-transfer' > < / div > ").appendTo(document.body).addClass(b.className).css({top:l.top-h,left:l.left-i,height:d.innerHeight(),width:d.innerWidth(),position:f?"fixed":"absolute\
+            "}).animate(k,b.duration,b.easing,function(){m.remove(),c()})}});</script>
+    <script type="text/javascript" src="{% static "hom2_files/jquery_004.js" %}"></script>
+    <script type="text/javascript"
+            src="data:text/javascript,var%20woocommerce_params%3D%7B%22ajax_url%22%3A%22%5C%2Fwp-admin%5C%2Fadmin-ajax.php%22%2C%22wc_ajax_url%22%3A%22%5C%2F%3Fwc-ajax%3D%25%25endpoint%25%25%22%7D%3B">var woocommerce_params = {
+        "ajax_url": "\/wp-admin\/admin-ajax.php",
+        "wc_ajax_url": "\/?wc-ajax=%%endpoint%%"
+    };</script>
+    <script type="text/javascript" src="{% static "hom2_files/frontend_woocommerce.js" %}"></script>
+    <script type="text/javascript"
+            src="data:text/javascript,eval(mod_pagespeed_O%24GmSXjbIy)%3B">eval(mod_pagespeed_O$GmSXjbIy);</script>
+    <script type="text/javascript"
+            src="data:text/javascript,eval(mod_pagespeed_MW_f_c2tez)%3B">eval(mod_pagespeed_MW_f_c2tez);</script>
+    <script type="text/javascript"
+            src="data:text/javascript,var%20wc_cart_fragments_params%3D%7B%22ajax_url%22%3A%22%5C%2Fwp-admin%5C%2Fadmin-ajax.php%22%2C%22wc_ajax_url%22%3A%22%5C%2F%3Fwc-ajax%3D%25%25endpoint%25%25%22%2C%22fragment_name%22%3A%22wc_fragments%22%7D%3B">var
+
+        wc_cart_fragments_params = {
+            "ajax_url": "\/wp-admin\/admin-ajax.php",
+            "wc_ajax_url": "\/?wc-ajax=%%endpoint%%",
+            "fragment_name": "wc_fragments"
+        };</script>
+    <script type="text/javascript" src="{% static "hom2_files/frontend_cart-fragments.js" %}"></script>
+    <script type="text/javascript"
+            src="data:text/javascript,eval(mod_pagespeed_FLeFgUSjWs)%3B">eval(mod_pagespeed_FLeFgUSjWs);</script>
+    <script type="text/javascript"
+            src="data:text/javascript,eval(mod_pagespeed_tU2WvSJDZ6)%3B">eval(mod_pagespeed_tU2WvSJDZ6);</script>
+    <script type="text/javascript"
+            src="data:text/javascript,var%20ywraq_frontend%3D%7B%22ajaxurl%22%3A%22https%3A%5C%2F%5C%2Fwww.primeabgb.com%5C%2Fwp-admin%5C%2Fadmin-ajax.php%22%2C%22no_product_in_list%22%3A%22Your%20list%20is%20empty%22%7D%3B">var
+
+        ywraq_frontend = {
+            "ajaxurl": "https:\/\/www.primeabgb.com\/wp-admin\/admin-ajax.php", "no_product_in_list": "Yourlist is empty"};</script>
+    <script type="text/javascript" src="{% static "hom2_files/frontend.js" %}"></script>
+<script type=" text/javascript" src="data:text/javascript,var%20yith_wc_quick_order_forms_object%3D%7B%22ajax_url%22%3A%22https%3A%5C%2F%5C%2Fwww.primeabgb.com%5C%2Fwp-admin%5C%2Fadmin-ajax.php%22%2C%22ajax_loader%22%3A%22https%3A%5C%2F%5C%2Fwww.primeabgb.com%5C%2Fwp-content%5C%2Fplugins%5C%2Fyith-quick-order-forms-for-woocommerce%5C%2Fassets%5C%2F%5C%2Fimages%5C%2Fajax-loader.gif%22%7D%3B">var
+
+    yith_wc_quick_order_forms_object={"ajax_url":"https:\/\/www.primeabgb.com\/wp-admin\/admin-ajax.php","ajax_loader":"https:\/\/www.primeabgb.com\/wp-content\/plugins\/yith-quick-order-forms-for-woocommerce\/assets\/\/images\/ajax-loader.gif"};</script>
+    <script
+    type = "text/javascript"
+    src = "{% static "hom2_files/yith-qof-frontend.js" %}" ></script>
+    <script type="text/javascript"
+            src="data:text/javascript,eval(mod_pagespeed_CTkhjWqkEZ)%3B">eval(mod_pagespeed_CTkhjWqkEZ);</script>
+    <script type="text/javascript"
+            src="data:text/javascript,eval(mod_pagespeed_7zBpfZF5Z9)%3B">eval(mod_pagespeed_7zBpfZF5Z9);</script>
+    <script type="text/javascript" src="{% static "hom2_files/plugins.js" %}"></script>
+    <script type="text/javascript" src="{% static "hom2_files/hoverIntent.js" %}"></script>
+    <script type="text/javascript"
+            src="data:text/javascript,eval(mod_pagespeed_JQVbsMYquI)%3B">eval(mod_pagespeed_JQVbsMYquI);</script>
+    <script type="text/javascript"
+            src="data:text/javascript,eval(mod_pagespeed_IJ8rbKMqqQ)%3B">eval(mod_pagespeed_IJ8rbKMqqQ);</script>
+    <script type="text/javascript"
+            src="data:text/javascript,var%20_wpUtilSettings%3D%7B%22ajax%22%3A%7B%22url%22%3A%22%5C%2Fwp-admin%5C%2Fadmin-ajax.php%22%7D%7D%3B">var _wpUtilSettings = {"ajax": {"url": "\/wp-admin\/admin-ajax.php"}};</script>
+    <script type="text/javascript"
+            src="data:text/javascript,window.wp%3Dwindow.wp%7C%7C%7B%7D%2Cfunction(a)%7Bvar%20b%3D%22undefined%22%3D%3Dtypeof%20_wpUtilSettings%3F%7B%7D%3A_wpUtilSettings%3Bwp.template%3D_.memoize(function(b)%7Bvar%20c%2Cd%3D%7Bevaluate%3A%2F%3C%23(%5B%5Cs%5CS%5D%2B%3F)%23%3E%2Fg%2Cinterpolate%3A%2F%5C%7B%5C%7B%5C%7B(%5B%5Cs%5CS%5D%2B%3F)%5C%7D%5C%7D%5C%7D%2Fg%2Cescape%3A%2F%5C%7B%5C%7B(%5B%5E%5C%7D%5D%2B%3F)%5C%7D%5C%7D(%3F!%5C%7D)%2Fg%2Cvariable%3A%22data%22%7D%3Breturn%20function(e)%7Breturn(c%3Dc%7C%7C_.template(a(%22%23tmpl-%22%2Bb).html()%2Cd))(e)%7D%7D)%2Cwp.ajax%3D%7Bsettings%3Ab.ajax%7C%7C%7B%7D%2Cpost%3Afunction(a%2Cb)%7Breturn%20wp.ajax.send(%7Bdata%3A_.isObject(a)%3Fa%3A_.extend(b%7C%7C%7B%7D%2C%7Baction%3Aa%7D)%7D)%7D%2Csend%3Afunction(b%2Cc)%7Bvar%20d%2Ce%3Breturn%20_.isObject(b)%3Fc%3Db%3A(c%3Dc%7C%7C%7B%7D%2Cc.data%3D_.extend(c.data%7C%7C%7B%7D%2C%7Baction%3Ab%7D))%2Cc%3D_.defaults(c%7C%7C%7B%7D%2C%7Btype%3A%22POST%22%2Curl%3Awp.ajax.settings.url%2Ccontext%3Athis%7D)%2Ce%3Da.Deferred(function(b)%7Bc.success%26%26b.done(c.success)%2Cc.error%26%26b.fail(c.error)%2Cdelete%20c.success%2Cdelete%20c.error%2Cb.jqXHR%3Da.ajax(c).done(function(a)%7B%221%22!%3D%3Da%26%261!%3D%3Da%7C%7C(a%3D%7Bsuccess%3A!0%7D)%2C_.isObject(a)%26%26!_.isUndefined(a.success)%3Fb%5Ba.success%3F%22resolveWith%22%3A%22rejectWith%22%5D(this%2C%5Ba.data%5D)%3Ab.rejectWith(this%2C%5Ba%5D)%7D).fail(function()%7Bb.rejectWith(this%2Carguments)%7D)%7D)%2Cd%3De.promise()%2Cd.abort%3Dfunction()%7Breturn%20e.jqXHR.abort()%2Cthis%7D%2Cd%7D%7D%7D(jQuery)%3B">window.wp = window.wp || {}, function (a) {
+        var
+            b = "undefined" == typeof
+                _wpUtilSettings ? {} : _wpUtilSettings;
+        wp.template = _.memoize(function (b) {
+            var
+
+                c, d = {
+                    evaluate: /<#([\s\S]+?)#>/g,
+                    interpolate: /\{\{\{([\s\S]+?)\}\}\}/g,
+                    escape: /\{\{([^\}]+?)\}\}(?!\})/g,
+                    variable: "data"
+                };
+            return function (e) {
+                return (c = c || _.template(a("#tmpl-" + b).html(), d))(e)
+            }
+        }), wp.ajax = {
+            settings: b.ajax || {}, post: function (a, b) {
+                return
+
+                wp.ajax.send({data: _.isObject(a) ? a : _.extend(b || {}, {action: a})})
+            }, send: function (b, c) {
+                var
+                    d, e;
+                return
+                _.isObject(b) ? c = b : (c = c || {}, c.data = _.extend(c.data || {}, {action: b})), c = _.defaults(c || {}, {
+                    type: "POST",
+                    url: wp.ajax.settings.url,
+                    context: this
+                }), e = a.Deferred(function (b) {
+                    c.success && b.done(c.success), c.error && b.fail(c.error), delete
+                        c.success, delete
+                        c.error, b.jqXHR = a.ajax(c).done(function (a) {
+                        "1" !== a && 1 !== a || (a = {success: !0}), _.isObject(a) && !_.isUndefined(a.success) ? b[a.success ? "resolveWith" : "rejectWith"](this, [a.data]) : b.rejectWith(this, [a])
+                    }).fail(function () {
+                        b.rejectWith(this, arguments)
+                    })
+                }), d = e.promise(), d.abort = function () {
+                    return
+                    e.jqXHR.abort(), this
+                }, d
+            }
+        }
+    }(jQuery);</script>
+    <script type="text/javascript"
+            src="data:text/javascript,var%20wc_add_to_cart_variation_params%3D%7B%22i18n_no_matching_variations_text%22%3A%22Sorry%2C%20no%20products%20matched%20your%20selection.%20Please%20choose%20a%20different%20combination.%22%2C%22i18n_make_a_selection_text%22%3A%22Please%20select%20some%20product%20options%20before%20adding%20this%20product%20to%20your%20cart.%22%2C%22i18n_unavailable_text%22%3A%22Sorry%2C%20this%20product%20is%20unavailable.%20Please%20choose%20a%20different%20combination.%22%7D%3B">var
+
+        wc_add_to_cart_variation_params = {
+            "i18n_no_matching_variations_text": "Sorry,\
+            no products matched your selection.Please\
+    choose\
+    a\
+    different\
+    combination.\
+    ","\
+    i18n_make_a_selection_text\
+    ":"\
+    Please\
+    select\
+    some\
+    product\
+    options\
+    before\
+    adding\
+    this\
+    product\
+    to\
+    your\
+    cart.\
+    ","\
+    i18n_unavailable_text\
+    ":"\
+    Sorry, this\
+    product\
+    is\
+    unavailable.Please\
+    choose\
+    a\
+    different\
+    combination.\
+    "};</script>
+    <script type="text/javascript" src="{% static  "hom2_files/add-to-cart-variation.js" %}"></script>
+    <script type="text/javascript"
+            src="data:text/javascript,var%20myAjax%3D%7B%22ajaxurl%22%3A%22https%3A%5C%2F%5C%2Fwww.primeabgb.com%5C%2Fwp-admin%5C%2Fadmin-ajax.php%22%2C%22noresults%22%3A%22No%20results%20were%20found!%22%7D%3B">var myAjax = {
+        "ajaxurl": "https:\/\/www.primeabgb.com\/wp-admin\/admin-ajax.php",
+        "noresults": "No results were found!"
+    };</script>
+    <script type="text/javascript" src="{% static "hom2_files/wp-content_themes_royal_js_etheme.js" %}"></script>
+    <script type="text/javascript"
+            src="data:text/javascript,eval(mod_pagespeed_93fRBplRyX)%3B">eval(mod_pagespeed_93fRBplRyX);</script>
+    <script type="text/javascript"
+            src="data:text/javascript,eval(mod_pagespeed_iVr1iGGpTv)%3B">eval(mod_pagespeed_iVr1iGGpTv);</script>
+    <script type="text/javascript" src="{% static "hom2_files/js_composer_front.js" %}"></script>
+    <script type="text/javascript"
+            src="{% static "hom2_files/js_composer-NULLED_assets_lib_bower_jquery-ui-tabs-rotate_jqu.js" %}"></script>
+    <script type="text/javascript"
+            src="data:text/javascript,eval(mod_pagespeed_12Mkj6sRfH)%3B">eval(mod_pagespeed_12Mkj6sRfH);</script>
+    <script type="text/javascript"
+            src="data:text/javascript,eval(mod_pagespeed_pccUu9MPYG)%3B">eval(mod_pagespeed_pccUu9MPYG);</script>
+    <!-- WooCommerce JavaScript -->
+    <script type="text/javascript"
+            src="data:text/javascript,jQuery(function(%24)%7BjQuery('.dropdown_product_cat').change(function()%7Bif(jQuery(this).val()!%3D'')%7Bvar%20this_page%3D''%3Bvar%20home_url%3D'https%3A%2F%2Fwww.primeabgb.com%2F'%3Bif(home_url.indexOf('%3F')%3E0)%7Bthis_page%3Dhome_url%2B'%26product_cat%3D'%2BjQuery(this).val()%3B%7Delse%7Bthis_page%3Dhome_url%2B'%3Fproduct_cat%3D'%2BjQuery(this).val()%3B%7Dlocation.href%3Dthis_page%3B%7D%7D)%3B%7D)%3B">jQuery(function ($) {
+        jQuery('.dropdown_product_cat').change(function () {
+            if (jQuery(this).val() != '') {
+                var
+                    this_page = '';
+                var
+                    home_url = 'https://www.primeabgb.com/';
+                if (home_url.indexOf('?') > 0) {
+                    this_page = home_url + '&product_cat=' + jQuery(this).val();
+                } else {
+                    this_page = home_url + '?product_cat=' + jQuery(this).val();
+                }
+                location.href = this_page;
+            }
+        });
+    });</script>
+
+
+    <script type="text/javascript" src="{% static "hom2_files/js_defer.js" %}"></script>
+    <div id="wp-a11y-speak-polite" aria-live="polite" aria-relevant="additions text" aria-atomic="true"
+         class="screen-reader-text wp-a11y-speak-region"></div>
+    <div id="wp-a11y-speak-assertive" aria-live="assertive" aria-relevant="additions text" aria-atomic="true"
+         class="screen-reader-text wp-a11y-speak-region"></div>

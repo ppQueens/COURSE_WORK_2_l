@@ -1,0 +1,35 @@
+{% load for_human_reading %}
+
+<div class="col-lg-4">
+    <table class="table mt-5 table-borderless">
+    <div style="">
+        {% for detail in full_details %}
+            <tbody>
+            {% if detail.2 %}
+            <tr>
+                <td class="no-gutters text-secondary h6 text-right">
+                    <div class="float-left">{{ detail.0|for_human_reading|capfirst }}: </div>
+                    <div class="float-right">{{ detail.1 }} {{ detail.2 }}</div></td>
+
+            </tr>
+            {% else %}
+            <tr>
+                <td class="no-gutters text-secondary h6 text-right">
+                    <div class="float-left">{{ detail.0|for_human_reading|capfirst }}:</div>
+                    <div class="float-right"><div class="text-left" style="display:block;">
+                        {%  if detail.1 in words %}
+                            {{ detail.1|for_human_reading:"values" }}
+                        {% else %}
+                            {{ detail.1 }}
+                        {% endif %}
+                        </div></div>
+                </td>
+
+            </tr>
+            {% endif %}
+        {% endfor %}
+
+        </tbody>
+    </div>
+    </table>
+</div>

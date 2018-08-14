@@ -1,0 +1,155 @@
+
+<script>
+        function setTrigger(id, value) {
+            $(id).val(value).trigger('change');
+        }
+        // Initialize slider:
+        $(document).ready(function () {
+{#            $('.noUi-handle').on('click', function () {#}
+{#                $(this).width(50);#}
+{#            });#}
+            var rangeSlider = document.getElementById('slider-range');
+            var moneyFormat = wNumb({
+                decimals: 0,
+                thousand: ',',
+                prefix: ''
+            });
+            var s = {{ items.min_price  }};
+            var e = {{ items.max_price }};
+            noUiSlider.create(rangeSlider, {
+                start: [s, e],
+                step: 1,
+                range: {
+                    'min': [s],
+                    'max': [e]
+                },
+                format: moneyFormat,
+                connect: true
+            });
+
+            // Set visual min and max values and also update value hidden form inputs
+            rangeSlider.noUiSlider.on('update', function (values, handle) {
+                document.getElementById('slider-range-value1').innerHTML = values[0];
+                document.getElementById('slider-range-value2').innerHTML = values[1];
+                document.getElementById('min-value').value = moneyFormat.from(
+                    values[0]);
+                setTrigger("#min-value", moneyFormat.from(
+                    values[0]));
+                document.getElementById('max-value').value = moneyFormat.from(
+                    values[1]);
+                setTrigger("#max-value", moneyFormat.from(
+                    values[1]));
+
+            });
+        });
+
+
+        jQuery(function ($) {
+            function csrfSafeMethod(method) {
+                // these HTTP methods do not require CSRF protection
+                return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+            }
+
+            $.ajaxSetup({
+                beforeSend: function (xhr, settings) {
+                    if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                        xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                    }
+                }
+            });
+
+
+
+            var checked = {};
+
+
+            $('#orderBy').change(function () {
+                checked["orderby"] = this.value;
+                send_with_ajax(checked);
+
+            });
+            function check_if_check(any_seria_filter, filter) {
+                $(any_seria_filter).each(function (int, value) {
+
+                    var id_check = "#".concat(value);
+                    console.log(id_check);
+                    $(id_check).change(function () {
+
+                        if ($(this).is(':checked')) {
+
+                            {#                            $(any_seria_filter).each(function (int, val) {#}
+                            $this = id_check;
+                            if ($($this).is(':checked')) {
+
+                                var label_id = $this;
+
+                                if (!checked[filter]) {
+                                    checked[filter] = []
+                                }
+                                if (!checked[filter].includes(value)) {
+                                    checked[filter].push(value.toString());
+                                }
+
+
+                            }
+
+                        }
+
+                        else {
+                            var to_del = $(id_check).attr("id");
+                            if (checked[filter].includes(to_del)) {
+                                checked[filter].splice($.inArray(to_del, checked[filter]), 1)
+                            }
+                            if (checked[filter].length < 1) delete checked[filter];
+                        }
+                        if (1) {
+                            if (jQuery.isEmptyObject(checked)) {
+                                checked = {"free": ""};
+                            }
+                            else delete checked["free"];
+
+                            send_with_ajax(checked);
+
+                        }
+
+                    });
+                });
+            }
+
+            jQuery("#min-value").change(function (e) {
+                var vmin = parseInt(document.getElementById('min-value').value);
+                var vmax = parseInt(document.getElementById('max-value').value);
+                if (vmin >= {{ items.min_price }} && vmax <= {{ items.max_price }}) {
+                    checked["min"] = document.getElementById('min-value').value;
+                    checked["max"] = document.getElementById('max-value').value;
+                    send_with_ajax(checked);
+
+
+                }
+
+            });
+
+
+            var list_frency = ["check_min_avr", "check_avr_max"];
+
+            function list_filling(cls) {
+                var res = [];
+                $("." + cls + " li input").each(function () {
+                    res.push($(this).attr("id"));
+                });
+                return res;
+            }
+
+            var filter_list = [{% for i in aside.dict_key_value.keys  %}"{{ i }}", {% endfor %}];
+
+            $.each(filter_list,function (key,item) {
+                check_if_check(list_filling(item), item);
+
+            });
+
+
+            check_if_check(list_frency, "frequency");
+        });
+
+
+</script>

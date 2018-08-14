@@ -1,0 +1,42 @@
+<style>
+
+    td.my-td {
+        border: none;
+
+    }
+
+    tr.my-tr th {
+        border-top: none;
+        border-bottom: none;
+
+    }
+
+</style>
+
+<div class="modal-body">
+
+
+    <div class="container">
+        {% block cart_content %}
+        {% endblock %}
+
+    </div>
+
+    <hr class="before-it">
+    <div class="row pt-4">
+
+        <div class="float-left col-4"><a href="#" data-dismiss="modal" class="goon btn btn-warning"><i class=""></i>Продолжить</a>
+        </div>
+
+        <div class="col-4"><strong> Общая сумма: <div class="full_amount d-inline">{{ cart.get_total_price|floatformat }}</div> </strong></div>
+        {% if not cart.is_empty %}
+            <div class="col-4"><a href="{% url "cart:cart_checking" %}" class="disabled btn btn-success">Перейти к
+                оформлению
+                <i class=""></i></a></div>
+        {% else %}
+            <div class="col-4"><a href="{% url "cart:cart_checking" %}" class="btn btn-success">Перейти к
+                оформлению
+                <i class=""></i></a></div>
+        {% endif %}
+    </div>
+</div>

@@ -1,0 +1,50 @@
+<div class="card card-filter">
+    <article class="card-group-item">
+        <header class="card-header">
+            <a class="" aria-expanded="true" href="#" data-toggle="collapse"
+               data-target="#collapse88">
+                <i class="icon-action fa fa-chevron-down"></i>
+                <span class="title">Цена</span>
+            </a>
+        </header>
+        <div style="" class="filter-content collapse show" id="collapse88">
+            <div class="card-body">
+
+
+                <ul class="list-unstyled list-lg">
+                    <div class="list-group list-group-flush">
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div id="slider-range"></div>
+                            </div>
+                        </div>
+                        <div class="row slider-labels">
+                            <div class="col-xs-12 offset-1  caption">
+                                <strong></strong> <span id="slider-range-value1"></span> грн.
+                            </div>
+                            <div class="col-xs-12 offset-5 text-right caption">
+                                <strong></strong> <span id="slider-range-value2"></span> грн.
+                            </div>
+                        </div>
+                        <div class="form-row mt-3">
+                            {#                                                <div class="col-sm-12">#}
+                            <div class="form-group col-md-5 offset-1">
+                                <input type="number" id="min-value" class="form-control"
+                                       min="{{ min_price }}" max="{{ max_price }}" name="min-value"
+                                       value="">
+                            </div>
+                            <div class="form-group text-right col-md-5">
+                                <input type="number" id="max-value" class="form-control"
+                                       min="{{ min_price }}" max="{{ max_price }}" name="max-value"
+                                       value="">
+                            </div>
+                            {#                                                </div>#}
+                        </div>
+                    </div>
+                </ul>
+            </div> <!-- card-body.// -->
+        </div> <!-- collapse .// -->
+    </article> <!-- card-group-item.// -->
+
+</div> <!-- card.// -->

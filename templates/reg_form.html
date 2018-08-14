@@ -1,0 +1,93 @@
+{% extends "main.html" %}
+{% block content %}
+    <!-- ========================= SECTION CONTENT ========================= -->
+    <section class="section-content bg padding-y">
+        <div class="container">
+
+            <div class="row">
+
+                <main class="col-sm-9">
+
+
+                    <div class="row">
+
+                        <div class="offset-1">
+                            <header class="">
+                                {#	<a href="" class="float-right btn btn-outline-primary mt-1 mr-3">Вход</a>#}
+                                <h4 class="pl-3">Регистрация</h4>
+                            </header>
+                            <article class="card-body">
+                                <form method="post" action="/register/">{% csrf_token %}
+                                    <style>
+                                        .alert {
+                                            margin-bottom: 0;
+                                            padding: 8px 5px;
+                                        }
+                                    </style>
+                                    <div class="form-row">
+                                        <div class="col form-group">
+                                            <label>Ваше имя</label>
+
+                                                    <input class="form-control" placeholder="" name="username"
+                                                           type="text">
+                                                    {% if form.username.errors %}
+                                                        <div class="alert alert-danger">
+                                                            <strong>{{ form.username.errors.0 }}</strong>
+                                                        </div>
+                                                    {% endif %}
+                                        </div> <!-- form-group end.// -->
+                                        {#		<div class="col form-group">#}
+                                        {#			<label>Last name</label>#}
+                                        {#		  	<input class="form-control" placeholder="" type="text">#}
+                                        {#		</div> <!-- form-group end.// -->#}
+                                    </div> <!-- form-row end.// -->
+
+                                    <div class="form-group">
+                                        <label>Ваша почта или телефон</label>
+                                                <input class="form-control" name="email" placeholder="" type="email">
+                                                {% if form.email.errors %}
+                                                    <div class="alert alert-danger">
+                                                        <strong>{{ form.email.errors.0 }}</strong>
+                                                    </div>
+
+                                                {% endif %}
+
+                                    </div> <!-- form-group end.// -->
+
+                                    <div class="form-group">
+                                        <label>Ваш пароль</label>
+
+                                                <input class="form-control" name="password" type="password">
+
+{#                                                {% if form.password.errors %}#}
+{#                                                    <div class="alert alert-danger">#}
+{#                                                        <strong>{{ form.password.errors.0 }}</strong>#}
+{#                                                    </div>#}
+{##}
+{#                                                {% endif %}#}
+
+
+                                    </div> <!-- form-group end.// -->
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary btn-block"> Зарегистрироваться
+                                        </button>
+                                    </div> <!-- form-group// -->
+                                </form>
+                            </article> <!-- card-body end .// -->
+                            {#<div class="border-top card-body text-center">Have an account? <a href="">Log In</a></div>#}
+                        </div> <!-- card.// -->
+
+
+                    </div> <!-- row.// -->
+
+
+                </main> <!-- col.// -->
+            </div>
+
+        </div> <!-- container .//  -->
+    </section>
+    <!-- ========================= SECTION CONTENT END// ========================= -->
+{% endblock %}
+
+
+

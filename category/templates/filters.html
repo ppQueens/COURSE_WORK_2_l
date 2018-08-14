@@ -1,0 +1,42 @@
+{% include "my_js.html" %}
+{% load get_by_key replace  %}
+
+        {% for title, values in aside.dict_key_value.items %}
+            <div class="card card-filter">
+                <article class="card-group-item">
+                    <header class="card-header">
+                        <a class="" aria-expanded="true" href="#" data-toggle="collapse"
+                           data-target="#collapse{{ title }}">
+                            <i class="icon-action fa fa-chevron-down"></i>
+                            <span class="title">{{ aside.translate|get_by_key:title|capfirst }}</span>
+                        </a>
+                    </header>
+                    <div style="" class="filter-content collapse show" id="collapse{{ title }}">
+                        <div class="card-body">
+
+                            <ul class="list-unstyled list-lg">
+                                <div class="list-group list-group-flush">
+                                    <div class="checkbox checkbox-warning {{ title }}">
+                                        {% for filter in values %}
+                                            {{ d }}
+                                            <li>
+                                                {#                                                    <form method="post"> {% csrf_token %}#}
+                                                <input id="{{ filter }}"  type="checkbox"
+                                                       class="styled" unchecked>
+                                                {#                                                        </form>#}
+                                                <label for="{{ filter }}">
+                                                    {{ aside.dict_secret_human|get_by_key:filter|capfirst }}
+                                                </label>
+
+                                            </li>
+
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </ul>
+                        </div> <!-- card-body.// -->
+                    </div> <!-- collapse .// -->
+                </article> <!-- card-group-item.// -->
+
+            </div> <!-- card.// -->
+        {% endfor %}

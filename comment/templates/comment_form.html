@@ -1,0 +1,20 @@
+
+
+    <form id="addComment" class="m-2" action="{{ item_slug }}" method="post">
+        {% csrf_token %}
+        <div class="form-row">
+            <div class="col-3">
+                <input type="text" name="name" class="form-control" placeholder="Ваше имя"
+                       value="{{ user.customer.fl_name }}">
+            </div>
+            <div class="col-4">
+                <input type="text" class="form-control" name="phone_email" placeholder="Почта или номер"
+                       value="{{ user.email }}">
+            </div>
+        </div>
+        <div class="form-group mt-2">
+            <textarea class="form-control" name="text" minlength="100" placeholder="Комментарий..." id="commentText"
+                      rows="3"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Отправить</button>
+    </form>

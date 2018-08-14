@@ -1,0 +1,38 @@
+{% extends "main.html" %}
+{% load replace replus for_human_reading get_by_key django_bootstrap_breadcrumbs %}
+{% block page_title %}
+   Категория:  {{  title|capfirst }}
+
+{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb title "../"|add:"" %}
+{% endblock %}
+
+{% block content %}
+    {% include "my_js.html" %}
+    <section class="section-content bg padding-y">
+        <div class="container">
+            <div class="row">
+                <aside class="col-sm-2 pl-0">
+                    {% include "filters.html" %}
+
+                    {#              {% include "socket.html" %}#}
+
+                    {% include "price_range.html" %}
+
+                </aside> <!-- col.// -->
+
+
+                <main class="col-sm-10">
+                    {% include "sort.html" %}
+                    <div class="row row-eq-height">
+                        {% include "items.html" %}
+                    </div> <!-- row.// -->
+
+                </main> <!-- col.// -->
+            </div>
+        </div>
+    </section>
+{% endblock %}

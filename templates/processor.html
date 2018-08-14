@@ -1,0 +1,241 @@
+{% extends "main.html" %}
+{% load replace replus for_human_reading %}
+{% block title %}
+    {{ title }}
+{% endblock %}
+{% block scripts %}
+        {% csrf_token %}
+{% include "my_js.html" %}
+
+{% endblock %}
+
+{% block content %}
+
+    <!-- ========================= SECTION CONTENT ========================= -->
+    <section class="section-content bg padding-y">
+        <div class="container">
+
+
+            <div class="row">
+                <aside class="col-sm-2 pl-0">
+
+                    <div class="card card-filter">
+                        <article class="card-group-item">
+                            <header class="card-header">
+                                <a class="" aria-expanded="true" href="#" data-toggle="collapse"
+                                   data-target="#collapse22">
+                                    <i class="icon-action fa fa-chevron-down"></i>
+                                    <span  class="title">Семейство процессоров</span>
+                                </a>
+                            </header>
+                            <div style="" class="filter-content collapse show" id="collapse22">
+                                <div class="card-body">
+
+                                    <ul class="list-unstyled list-lg">
+                                        <div class="list-group list-group-flush">
+                                            <div class="checkbox checkbox-warning family">
+                                                {% for y in filters.family %}
+
+                                                    <li>
+                                                        {#                                                    <form method="post"> {% csrf_token %}#}
+                                                        <input id="check_{{ y.0|underline }}" type="checkbox"
+                                                               class="styled" unchecked>
+                                                        {#                                                        </form>#}
+                                                        <label for="check_{{ y.0|underline }}">
+                                                            {{ y.0 }}
+                                                        </label>
+
+                                                    </li>
+
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </ul>
+                                </div> <!-- card-body.// -->
+                            </div> <!-- collapse .// -->
+                        </article> <!-- card-group-item.// -->
+
+                    </div> <!-- card.// -->
+
+                    {% include "socket.html" %}
+                    <div class="card card-filter">
+                        <article class="card-group-item">
+                            <header class="card-header">
+                                <a class="" aria-expanded="true" href="#" data-toggle="collapse"
+                                   data-target="#collapse44">
+                                    <i class="icon-action fa fa-chevron-down"></i>
+                                    <span class="title">Количество ядер</span>
+                                </a>
+                            </header>
+                            <div style="" class="filter-content collapse show" id="collapse44">
+                                <div class="card-body">
+
+
+                                    <ul class="list-unstyled list-lg">
+                                        <div class="list-group list-group-flush">
+                                            <div class="checkbox checkbox-warning core">
+                                                {% for y in filters.core %}
+
+                                                    <li>
+
+                                                        <input id="check_{{ y.0|underline }}"
+                                                               type="checkbox"
+                                                               class="styled" unchecked>
+                                                        <label for="check_{{ y.0|underline }}">
+                                                            {{ y.0 }}
+                                                        </label>
+
+                                                    </li>
+                                                {% endfor %}
+                                            </div>
+
+                                        </div>
+                                    </ul>
+                                </div> <!-- card-body.// -->
+                            </div> <!-- collapse .// -->
+
+                        </article> <!-- card-group-item.// -->
+
+                    </div> <!-- card.// -->
+                    <div class="card card-filter">
+                        <article class="card-group-item">
+                            <header class="card-header">
+                                <a class="" aria-expanded="true" href="#" data-toggle="collapse"
+                                   data-target="#collapse55">
+                                    <i class="icon-action fa fa-chevron-down"></i>
+                                    <span class="title">Производитель</span>
+                                </a>
+                            </header>
+                            <div style="" class="filter-content collapse show" id="collapse55">
+                                <div class="card-body">
+
+
+                                    <ul class="list-unstyled list-lg">
+                                        <div class="list-group list-group-flush">
+                                            <div class="checkbox checkbox-warning man">
+                                                {% for y in filters.manufacturer %}
+
+                                                    <li>
+
+                                                        <input id="check_{{ y.0|underline }}"
+                                                               type="checkbox"
+                                                               class="styled" unchecked>
+                                                        <label for="check_{{ y.0|underline }}">
+                                                            {{ y.0 }}
+                                                        </label>
+
+                                                    </li>
+                                                {% endfor %}
+                                            </div>
+
+                                        </div>
+                                    </ul>
+                                </div> <!-- card-body.// -->
+                            </div> <!-- collapse .// -->
+                        </article> <!-- card-group-item.// -->
+                    </div> <!-- card.// -->
+                    <div class="card card-filter">
+                        <article class="card-group-item">
+                            <header class="card-header">
+                                <a class="" aria-expanded="true" href="#" data-toggle="collapse"
+                                   data-target="#collapse66">
+                                    <i class="icon-action fa fa-chevron-down"></i>
+                                    <span class="title">Внутренняя тактовая частота</span>
+                                </a>
+                            </header>
+                            <div style="" class="filter-content collapse show" id="collapse66">
+                                <div class="card-body">
+
+
+                                    <ul class="list-unstyled list-lg">
+                                        <div class="list-group list-group-flush">
+                                            <div class="checkbox checkbox-warning">
+
+                                                <li>
+
+                                                    <input id="check_min_avr" type="checkbox"
+                                                           class="styled" unchecked>
+                                                    <label for="check_min_avr">
+                                                        Больше {{ d.min }} - меньше {{ d.avr }}
+                                                    </label>
+
+                                                </li>
+
+                                                <li>
+
+                                                    <input id="check_avr_max" type="checkbox"
+                                                           class="styled" unchecked>
+                                                    <label for="check_avr_max">
+                                                        Больше {{ d.avr }} - меньше {{ d.max }}
+                                                    </label>
+
+                                                </li>
+
+
+                                            </div>
+
+                                        </div>
+                                    </ul>
+                                </div> <!-- card-body.// -->
+                            </div> <!-- collapse .// -->
+                        </article> <!-- card-group-item.// -->
+
+                    </div> <!-- card.// -->
+                    <div class="card card-filter">
+                        <article class="card-group-item">
+                            <header class="card-header">
+                                <a class="" aria-expanded="true" href="#" data-toggle="collapse"
+                                   data-target="#collapse77">
+                                    <i class="icon-action fa fa-chevron-down"></i>
+                                    <span class="title">Число потоков</span>
+                                </a>
+                            </header>
+                            <div style="" class="filter-content collapse show" id="collapse77">
+                                <div class="card-body">
+
+
+                                    <ul class="list-unstyled list-lg">
+                                        <div class="list-group list-group-flush">
+                                            <div class="checkbox checkbox-warning thread">
+                                                {% for y in filters.thread %}
+
+                                                    <li>
+
+                                                        <input id="check_thread_{{ y.0|underline }}"
+                                                               type="checkbox"
+                                                               class="styled" unchecked>
+                                                        <label for="check_thread_{{ y.0|underline }}">
+                                                            {{ y.0 }}
+                                                        </label>
+
+                                                    </li>
+                                                {% endfor %}
+                                            </div>
+
+                                        </div>
+                                    </ul>
+                                </div> <!-- card-body.// -->
+                            </div> <!-- collapse .// -->
+                        </article> <!-- card-group-item.// -->
+                    </div> <!-- card.// -->
+                    {% include "price_range.html" %}
+
+                </aside> <!-- col.// -->
+
+
+                <main class="col-sm-10">
+                    {% include "sort.html" %}
+                    <div class="row row-eq-height">
+                        {% include "processor_items.html" %}
+                    </div> <!-- row.// -->
+
+                </main> <!-- col.// -->
+            </div>
+
+        </div> <!-- container .//  -->
+    </section>
+    <!-- ========================= SECTION CONTENT END// ========================= -->
+    <script>
+    </script>
+
+{% endblock %}

@@ -1,0 +1,77 @@
+{% extends "login.html" %}
+{% block content %}
+            <div class="page-heading bc-type-1">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 a-center">
+                            <h1 class="title"><span>My Account</span></h1>
+                            <div class="breadcrumbs"><div id="breadcrumb"><a href="#">Home</a> <span class="delimeter">/</span>
+
+                                <span class="current">My Account</span></div><a class="back-history" href="javascript:%20history.go(-1)">Return to Previous Page</a></div>                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+		<div class="page-content sidebar-position-no_sidebar sidebar-mobile-bottom">
+			<div class="row">
+
+				<div class="content col-md-12">
+
+						<p>Please email us on sales@primeabgb.com for any order or purchase related query.<br>
+</p><div class="woocommerce">
+<nav class="woocommerce-MyAccount-navigation">
+	<ul>
+					<li class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--dashboard is-active firstItem">
+				<a href="/account"></a>
+			</li>
+					<li class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--orders">
+				<a href="/orders">Заказы</a>
+			</li>
+					<li class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--downloads">
+				<a href="/downloads">Загрузки</a>
+			</li>
+					<li class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--edit-address">
+				<a href="/addresses">Адреса</a>
+			</li>
+					<li class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--edit-account">
+				<a href="/acc_details">Подробности аккаунта</a>
+			</li>
+					<li class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--customer-logout lastItem">
+				<a href="/logout">Выход</a>
+			</li>
+			</ul>
+</nav>
+
+
+<div class="woocommerce-MyAccount-content">
+
+<p>
+	Hello <strong>peterfromqueens</strong> (not peterfromqueens? <a href="#">Sign out</a>)</p>
+
+<p>
+	From your account dashboard you can view your <a href="#">recent orders</a>, manage your <a href="#">shipping and billing addresses</a> and <a href="#">edit your password and account details</a>.</p>
+
+
+<h2>My Pre-Orders</h2>
+
+
+	<p>You have no pre-orders.</p>
+
+		<div id="raf-message" class="woocommerce-message">Your Referral URL: <a href="#">https://www.primeabgb.com?raf=ref3653130</a></div>
+	</div>
+</div>
+
+						<div class="post-navigation">
+													</div>
+
+
+
+				</div>
+
+
+			</div><!-- end row-fluid -->
+
+		</div>
+
+{% endblock %}

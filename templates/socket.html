@@ -1,0 +1,39 @@
+{% load replus replace %}
+<div class="card card-filter">
+    <article class="card-group-item">
+        <header class="card-header">
+            <a class="" aria-expanded="true" href="#" data-toggle="collapse"
+               data-target="#collapse33">
+                <i class="icon-action fa fa-chevron-down"></i>
+                <span class="title">Тип разъема</span>
+            </a>
+        </header>
+        <div style="" class="filter-content collapse show" id="collapse33">
+            <div class="card-body">
+
+
+                <ul class="list-unstyled list-lg">
+                    <div class="list-group list-group-flush">
+                        <div class="checkbox checkbox-warning socket">
+                            {% for y in filters.socket_type %}
+
+                                <li>
+
+                                    <input id="check_{{ y.0|underline|replus }}"
+                                           type="checkbox"
+                                           class="styled" unchecked>
+                                    <label for="check_{{ y.0|underline|replus }}">
+                                        {{ y.0 }}
+                                    </label>
+
+                                </li>
+                            {% endfor %}
+                        </div>
+
+                    </div>
+                </ul>
+            </div> <!-- card-body.// -->
+        </div> <!-- collapse .// -->
+
+    </article> <!-- card-group-item.// -->
+ </div>

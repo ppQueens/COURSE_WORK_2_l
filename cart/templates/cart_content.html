@@ -1,0 +1,37 @@
+{% extends "cart_modal.html" %}
+{% block cart_content %}
+    {% for item in cart %}
+        {% with good=item.item %}
+            <div class="row mb-3">
+                <div class="col-6" data-th="Product">
+                    <a href="{{ good.get_absolute_url }}"> </a>
+                    <div class="row">
+                        <div class="col-lg-4"><img src="http://placehold.it/100x100" alt="..."
+                                                   class="img-responsive"/></div>
+                        <div class="col-lg-7">
+                            <h5 class="nomargin"><a href="{{ good.get_absolute_url }}">{{ good.title }}</a></h5>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-2 text-right" data-url="{% url "cart:cart_add_item" good.slug %}" data-th="Quantity">
+                    <input type="number" min="1" class="itemQuant form-control text-center" value="{{ item.quantity }}">
+                </div>
+
+
+                <div class="col-2 text-right" data-th="Price">
+                    <div><h5> {{ item.total_price|floatformat }} </h5></div>
+                </div>
+
+                <form class="cartRemove" action="{% url "cart:cart_remove_item" good.slug %}" method="post">
+                    {% csrf_token %}
+                    <div class="col-2 text-right" data-th="">
+                        <button class="btn btn-danger"><i class="fa fa-trash-o"></i></button>
+                    </div>
+                </form>
+            </div>
+        {% endwith %}
+    {% endfor %}
+
+{% endblock %}

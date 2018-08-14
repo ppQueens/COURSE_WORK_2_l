@@ -1,0 +1,27 @@
+
+<form method="post" action="/login/" class="login login-form">{% csrf_token %}
+
+    <h3><span>Login</span></h3>
+
+
+    <p class="form-row form-row-wide">
+        <label for="username">Username or email address <span class="required">*</span></label>
+        <input class="input-text" name="username" id="username" type="text">
+    </p>
+    <p class="form-row form-row-wide">
+        <label for="password">Password <span class="required">*</span></label>
+        <input class="input-text" name="password" id="password" type="password">
+    </p>
+
+
+    <input id="_wpnonce" name="_wpnonce" value="4635bc972f" type="hidden"><input name="_wp_http_referer"
+                                                                                 value="/my-account/" type="hidden">
+
+    <button type="submit" class="btn btn-black big pull-left" name="login" value="Login">Login</button>
+    <p class="lost-password pull-left">Lost your password? <a
+            href="#">Remind password</a></p>
+
+    <label for="rememberme" class="inline">
+        <input name="rememberme" id="rememberme" value="forever" type="checkbox"> Remember me </label>
+
+</form>
