@@ -1,16 +1,18 @@
-from django.shortcuts import render
-from .models import Category
-from django.db.models import Q,F, Func, Value
-from item.models import Item, ItemField, ItemFieldItem, ItemFieldTitle, ItemFieldTypeValue
 from decimal import Decimal
-from .translates_word import fields
-from django.db.models import Count, Sum
-from .translates_word import reversed_categories, categories
-from django.urls import reverse
-from django.db.models.functions import Concat
+
+from django.db.models import Q
+from django.shortcuts import render
+
+from item.models import Item, ItemFieldItem
+from translates_word import fields
+from translates_word import reversed_categories
+from .models import Category
+
+
 # Create your views here.
 
-
+#todo: переделать все на***
+#todo: особенно места с if зуйпоймичто
 
 def freq(category):
     d = {}
@@ -27,10 +29,21 @@ def freq(category):
 
 
 def show_categories(request):
-    hardware_cats = Category.objects.extra(
-        where=["rght - lft = 1 and parent_id is not null and (parent_id = 15 or mptt_level = 2)"]).order_by("id")
+    hardware_cats = Category.objects.\
+        extra(
+        where=["rght - lft = 1 and parent_id is not null and (parent_id = 15 or mptt_level = 2)"])\
+        .values("title","cats_image","main_page_filters") .order_by("id")
     network_hardware_cats = Category.objects.extra(where=["parent_id = 17"]).order_by("id")
     peripheral_hardware_cats = Category.objects.extra(where=["parent_id = 23"]).order_by("id")
+
+
+    #
+    result = {Category(id=id,title=cat["title"],cats_image=cat["cats_image"]):cat["main_page_filters"].split(", ") for id,cat in enumerate(hardware_cats)}
+    #
+    # result = dict()
+    # for cat in hardware_cats:
+    #     result[cat["title"]] = cat["main_page_filters"].split(", ")
+    # print(result)
 
     links_for = ("processors","motherboards") #add some on demand
     links_for_cat = dict(hardware_cats.filter(url_field__in=links_for).values_list("url_field","url_field"))
@@ -44,20 +57,19 @@ def set_filters(request, category):
     q = Q()
     free = True
     items = Item.objects.filter(item_category=category)
-        # annotate(abs_url=F("slug")). \
-
-    # , itemimage__as_main = True
-        # values("title", "item_price", "item_quantity", "itemimage__image", "slug", "abs_url", "item_category")
 
     if request.POST.get("free") == "":
         free = False
     if request.POST and free:
         print(request.POST)
         for i in request.POST:
-            if i != "min" and i != "max" and i != "orderby":
+            if i != "min" and i != "max" and i != "orderby" and i != "manufacturer" and i != "csrfmiddlewaretoken" and i !="from_main":
                 some_list = request.POST.getlist(i)
                 items = items.filter(item_fields__value__unique_str_id__in=some_list).distinct()
 
+        if request.POST.get("manufacturer"):
+            items = items.filter(item_fields__value__field_value=request.POST.get("manufacturer"))
+            print(items)
         if request.POST.get("min"):
             items = items.filter(item_price__gte=Decimal(request.POST.get("min")))
         if request.POST.get("max"):
@@ -72,8 +84,13 @@ def get_items(request, category):
     q, items = set_filters(request, Category.objects.filter(url_field=category).get())
     price = items.values_list("item_price", flat=True)
 
-    max_price = round(max(price), 0)
-    min_price = round(min(price), 0)
+    print(len(Item.objects.filter(id=2).get().comments.all()))
+
+    try:
+        max_price = round(max(price), 0)
+        min_price = round(min(price), 0)
+    except ValueError:
+        return print("Have no items in this price range")
 
     if request.POST.get("orderby") == "cheapest":
         q_sort = "item_price"
@@ -91,13 +108,19 @@ def get_content(request, category):
     print(category)
     items = get_items(request,category)
 
-
-    title = reversed_categories[category]
-    # if not request.POST:
     aside = get_filters(category)
 
-    # else:
-    #     return render(request, "items.html", locals())
+    title = reversed_categories[category]
+
+    if "from_main" in request.POST:
+        return render(request, "some_category_page.html", locals())
+    if request.POST:
+        if not items:
+            return render(request, "items.html",{"no_items":"Have no items in the this price range"})
+        return render(request, "items.html", locals())
+
+
+
     return render(request, "some_category_page.html", locals())
 
 

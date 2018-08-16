@@ -1,14 +1,17 @@
-from django.db import models
-from st_app.models import Brand, CommonFields
-from category.models import Category
-from django.core.validators import MinValueValidator
-from customer.models import Customer
-from django.urls import reverse
-from transliterate import translit
-from django.db.models.signals import post_save, pre_save
-from category.translates_word import categories
-import hashlib, time
+import hashlib
+import time
 import uuid
+
+from django.core.validators import MinValueValidator
+from django.db import models
+from django.db import transaction
+from django.db.models.signals import post_save
+from django.urls import reverse
+
+from category.models import Category
+from customer.models import Customer
+from st_app.models import Brand, CommonFields
+from translates_word import categories
 
 
 def _createHash():
@@ -110,7 +113,9 @@ class ItemImage(models.Model):
         verbose_name_plural = "ItemImage"
         # instance.image = models.ImageField(upload_to=str(instance.image).split("/", 2)[2],blank=True,default=None)
 
+@transaction.atomic()
 def static_url(sender, instance, **kwargs):
+
     if kwargs["created"]:
         instance.image = str(instance.image).split("/", 2)[2]
         instance.save(force_update=True)

@@ -12,10 +12,10 @@ from django.contrib.auth.models import User
 from django.core.mail import EmailMessage
 from .util import TokenGenerator
 from django.db import transaction
-from django.views.decorators.http import require_POST
+from django.contrib.auth.decorators import login_required
 from customer.models import Customer
 from django.contrib.auth.hashers import make_password
-
+from order.models import Order
 account_activation_token = TokenGenerator()
 
 
@@ -108,3 +108,17 @@ def activate(request, uidb64, token):
                         </script>')
     else:
         return HttpResponse('Activation link is invalid!')
+
+@login_required(login_url="/account/login")
+def user_profile(request):
+
+
+
+    return render(request, "profile.html", locals())
+
+
+@login_required(login_url="/account/login")
+def user_order_history(request):
+    orders = Order.objects.filter(customer__customer_id=request.user.id)
+
+    return render(request, "order_history.html",locals())

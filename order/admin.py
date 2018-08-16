@@ -1,10 +1,21 @@
 from django.contrib import admin
-from .models import DeliveryService
+from .models import OrderItem, Order
 # Register your models here.
 
 
 
-class DeliverySeriviceAdmin(admin.ModelAdmin):
-    list_display = ("title","to_door","to_pickUp_point")
+class OrderItemAdmin(admin.StackedInline):
+    model = OrderItem
+    extra = 1
 
-admin.site.register(DeliveryService,DeliverySeriviceAdmin)
+
+class OrderAdmin(admin.ModelAdmin):
+    class Meta:
+        model = Order
+
+    list_display = [field.name for field in Order._meta.fields]
+    readonly_fields = ["total_price","order_code"]
+    inlines = [OrderItemAdmin]
+
+
+admin.site.register(Order, OrderAdmin)

@@ -1,13 +1,10 @@
 from django.shortcuts import render
-from django.db.models import Q
-from .models import Item, ItemFieldItem
-from django.contrib.auth.decorators import login_required
-from transliterate import translit
-from django.http import HttpResponseRedirect  #
-from .models import ItemField
-from category import translates_word
 
-from category.translates_word import reversed_categories
+import translates_word
+
+from .models import Item, ItemFieldItem, ItemField
+
+
 # def show_item_processor(request):
 #     q = Q()
 #     if request.GET:
@@ -18,12 +15,9 @@ from category.translates_word import reversed_categories
 #     return render(request, 'processor.html', {"p": processors}, locals())
 #
 
-from comment.models import Comment
-from django.contrib.auth.models import User
-
 
 def item(request, category, item_slug):
-    title = reversed_categories[category]
+    title = translates_word.reversed_categories[category]
     self_item = Item.objects.filter(item_category__title=title).get(slug=item_slug)
     title_detail = ItemField.objects.filter(item__id=self_item.id,title__use_for="title").values_list("value__field_value")
     #
@@ -39,7 +33,7 @@ def item(request, category, item_slug):
     # warranty = self_item.item_fields.get(title__field_title="warranty")
     if request.method == "POST":
         return render(request, "item_content.html", locals())
-    return render(request, 'item_template.html', locals())
+    return render(request, 'item_main_template.html', locals())
 
 
 def details(request):

@@ -1,13 +1,12 @@
 
-
     <form id="addComment" class="m-2" action="{{ item_slug }}" method="post">
         {% csrf_token %}
         <div class="form-row">
-            <div class="col-3">
+            <div class="col-5">
                 <input type="text" name="name" class="form-control" placeholder="Ваше имя"
                        value="{{ user.customer.fl_name }}">
             </div>
-            <div class="col-4">
+            <div class="col-7">
                 <input type="text" class="form-control" name="phone_email" placeholder="Почта или номер"
                        value="{{ user.email }}">
             </div>

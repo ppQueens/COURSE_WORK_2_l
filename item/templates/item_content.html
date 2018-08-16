@@ -3,37 +3,6 @@
 
 <script>
 
-    $(document).on("click", "#buy-" + "{{ item_slug }}", function (event) {
-        event.preventDefault();
-        send_with_ajax($("#item-{{ item_slug }}").serializeArray(), "{% url 'cart:cart_add_item' item_slug %}", function (response) {
-            var $container = jQuery(".cart-content");
-
-            {#            добавить а не заменить#}
-            $container.html(response);
-            $("#cartModal").modal();
-
-        });
-
-    });
-
-    function some_about_item(some, url) {
-        $(document).on("click", "a[href='#" + some + "']", function (event) {
-            $(event.target).parent().children(".my-active").removeClass("my-active");
-            $(event.target).addClass("my-active");
-
-            var data = {"csrfmiddlewaretoken": csrftoken, "item_slug": "{{item_slug}}"};
-            send_with_ajax(data, url, function (response) {
-                $(".item-content > .container > .i-content-info").html(response);
-            });
-
-
-        });
-    }
-
-    some_about_item("item_details", "{% url "item:details" %}");
-    some_about_item("item_main", "{% url "item:item_main" category item_slug %}");
-
-
 </script>
 
 
@@ -42,15 +11,16 @@
         <aside class="col-sm-5 border-right">
             <article class="gallery-wrap  mt-2">
                 <div class="img-big-wrap">
-                    <div><a href="images/items/1.jpg" data-fancybox=""><img src="{% static self_item.main_image %}"></a></div>
+                    <div><a href="images/items/1.jpg" data-fancybox=""><img src="{% static self_item.main_image %}"></a>
+                    </div>
                 </div> <!-- slider-product.// -->
                 <div class="img-small-wrap">
                     {% for image in self_item.itemimage_set.all %}
-                        {% with image.image|make_str as str_img_path  %}
+                        {% with image.image|make_str as str_img_path %}
                             {% ifnotequal self_item.main_image str_img_path %}
-                    <div class="item-gallery"><img src="{% static str_img_path %}"></div>
+                                <div class="item-gallery"><img src="{% static str_img_path %}"></div>
                             {% endifnotequal %}
-                    {% endwith %}
+                        {% endwith %}
                     {% endfor %}
                 </div> <!-- slider-nav.// -->
             </article> <!-- gallery-wrap .end// -->
@@ -59,18 +29,8 @@
             <article class="card-body">
                 <!-- short-info-wrap -->
                 <h3 class="item-title title mb-3">
-
-                    {#                    {% for i in title_detail %}#}
-                    {#                        {% if i.1 == None %}#}
-                    {#                            {{ i.0 }} /#}
-                    {#                        {% else %}#}
-                    {#                            {{ i.0|add:i.1 }}#}
-                    {#                        {% endif %}#}
-                    {#                    {% endfor %}#}
-{#                    {% block page_title %}#}
-                        {{ self_item.title }} /
-                        {{ title_detail }}
-{#                    {% endblock %}#}
+                    {{ self_item.title }} /
+                    {{ title_detail }}
                 </h3>
 
                 <div class="mb-5 mt-5">
@@ -117,19 +77,52 @@
         </aside> <!-- col.// -->
     </div> <!-- row.// -->
 </main> <!-- card.// -->
-<article class="card mt-3">
-    <div class="card-body col-lg-6">
-        <h4>Краткие характеристики</h4>
-        <div class="ml-3 mt-3">
-            {% for detail in common_details %}
+<article class="mt-3">
 
-                <div class="row">
-                    <div class="text-secondary h6 ">{{ detail.0|for_human_reading|capfirst }}: <p></p></div>
-
-                    <div class="h6  text-left">{{ detail.1 }}</div>
+    <div class="row no-gutters justify-content-between">
+        <div class="card mb-3 mr-5 col-lg-5 border-0">
+            <div class="card-body">
+                <h4>Описание товара</h4>
+                <div class="mt-3">
+                    {{ self_item.description|safe }}
                 </div>
-            {% endfor %}
+            </div> <!-- card-body.// -->
 
         </div>
-    </div> <!-- card-body.// -->
+        <div class="card mb-3  col-lg-6 border-0">
+            <div class="card-body">
+                <script>
+
+                    send_with_ajax("", "/comments/show/{{ item_slug }}", function (response) {
+                        console.log("comments is recieved")
+                        $(".main-comments").html(response);
+                    }, "GET");
+
+
+                </script>
+                <h4>Отзывы покупателей</h4>
+                <div class="ml-3 mt-3 main-comments">
+
+
+                </div>
+            </div> <!-- card-body.// -->
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body col-lg-6">
+            <h4>Краткие характеристики</h4>
+            <div class="ml-3 mt-3">
+                {% for detail in common_details %}
+
+                    <div class="row">
+                        <div class="text-secondary h6 ">{{ detail.0|for_human_reading|capfirst }}: <p></p></div>
+
+                        <div class="h6  text-left">{{ detail.1 }}</div>
+                    </div>
+                {% endfor %}
+
+            </div>
+        </div> <!-- card-body.// -->
+    </div>
 </article>

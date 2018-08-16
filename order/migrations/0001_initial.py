@@ -13,7 +13,6 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('item', '0007_itemfield_use_for'),
-        ('status', '0001_initial'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
@@ -87,11 +86,11 @@ class Migration(migrations.Migration):
             name='order_shipment',
             field=models.ForeignKey(blank=True, default=None, null=True, on_delete=django.db.models.deletion.CASCADE, to='order.Shipment'),
         ),
-        migrations.AddField(
-            model_name='order',
-            name='order_status',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='status.Status'),
-        ),
+        # migrations.AddField(
+        #     model_name='order',
+        #     name='order_status',
+        #     field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='status.Status'),
+        # ),
         migrations.AlterUniqueTogether(
             name='orderitem',
             unique_together=set([('item', 'order')]),

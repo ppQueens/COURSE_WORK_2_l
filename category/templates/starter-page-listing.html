@@ -1,4 +1,5 @@
 {% extends "main.html" %}
+{% load for_human_reading static make_str %}
 {% block content %}
 
     <!-- ========================= SECTION CONTENT ========================= -->
@@ -26,7 +27,8 @@
                                             {% for cat in hardware_cats %}
 
 
-                                                <li><a href="/new_test/{{ cat.url_field }}/" class="list-group-item pl-1">{{ cat }} <span
+                                                <li><a href="/new_test/{{ cat.url_field }}/"
+                                                       class="list-group-item pl-1">{{ cat.title }} <span
                                                         class="float-right badge badge-light round">{{ " " }}</span></a>
                                                 </li>
 
@@ -54,17 +56,12 @@
 
                                     <ul class="list-unstyled list-lg">
                                         <div class="list-group list-group-flush">
-                                                {% for cat in network_hardware_cats %}
-                                                        <li><a href="#" class="list-group-item pl-1">{{ cat }} <span
-                                                                class="float-right badge badge-light round">{{ " " }}</span></a>
-                                                        </li>
+                                            {% for cat in network_hardware_cats %}
+                                                <li><a href="#" class="list-group-item pl-1">{{ cat }} <span
+                                                        class="float-right badge badge-light round">{{ " " }}</span></a>
+                                                </li>
 
-                                                    {#					<li><a href="#">{{ cat }} <span class="float-right badge badge-light round">({{ 0 }})</span> </a></li>#}
-                                                    {#					<li><a href="#">Dapibus ac facilisis  <span class="float-right badge badge-light round">3</span>  </a></li>#}
-                                                    {#					<li><a href="#">Morbi leo risus <span class="float-right badge badge-light round">32</span>  </a></li>#}
-                                                    {#					<li><a href="#">Another item <span class="float-right badge badge-light round">12</span>  </a></li>#}
-
-                                                {% endfor %}
+                                            {% endfor %}
                                         </div>
                                     </ul>
                                 </div> <!-- card-body.// -->
@@ -87,16 +84,10 @@
 
 
                                     <ul class="list-unstyled list-lg">
-                                       <div class="list-group list-group-flush">
+                                        <div class="list-group list-group-flush">
                                             {% for cat in peripheral_hardware_cats %}
-                                                    <li><a href="#" class="list-group-item pl-1">{{ cat }} <span
-                                                            class="float-right badge badge-light round">{{ " " }}</span></a>
-                                                    </li>
-
-                                                {#					<li><a href="#">{{ cat }} <span class="float-right badge badge-light round">({{ 0 }})</span> </a></li>#}
-                                                {#					<li><a href="#">Dapibus ac facilisis  <span class="float-right badge badge-light round">3</span>  </a></li>#}
-                                                {#					<li><a href="#">Morbi leo risus <span class="float-right badge badge-light round">32</span>  </a></li>#}
-                                                {#					<li><a href="#">Another item <span class="float-right badge badge-light round">12</span>  </a></li>#}
+                                                <li><a href="#" class="list-group-item pl-1">{{ cat }} </a>
+                                                </li>
 
                                             {% endfor %}
                                         </div>
@@ -111,301 +102,65 @@
                 </aside> <!-- col.// -->
                 <main class="col-sm-9">
 
+                    <div class="row row-eq-height">
+                        {% for cat,uniques in result.items %}
+                            {% if forloop.counter|divisibleby:5  %}
 
-                    <div class="row">
-                        <div class="col-md-3">
-                            <figure class="card card-sm card-product">
-                                {#                                <span class="badge-new"> NEW </span>#}
-                                <div class="img-wrap"><img src="images/items/3.jpg"></div>
-                                 <div class="list-group list-group-flush">
-                                <figcaption class="info-wrap text-left">
-                                    <h6 class="title text-truncate"><a href="/new_test/{{ links_for_cat.processors }}"  class="list-group-item pt-0 pb-0 pl-0">Процессоры</a></h6>
-                                </figcaption>
-                                <ul class="list-unstyled list-lg">
+                                </div> <!-- row.// -->
+                                 <div class="row row-eq-height">
+                            {% else %}
 
-                                        <div class=" ml-3">
+                                <div class="col-md-3 mb-4">
+                                    <figure class="card h-100  card-product">
+                                        {#                                <span class="badge-new"> NEW </span>#}
+                                        <div class="img-wrap pl-2 pr-2 center"><a href="/new_test/{{ links_for_cat.processors }}"><img src="{% static cat.cats_image|make_str %}"></a></div>
+                                        <div class="list-group  list-group-flush">
+                                            <figcaption class=" info-wrap text-left">
+                                                <h6 class="title text-break">
 
-                                            <li><a href="#" class="list-group-item pt-0 pb-0"><i class="icon-action pr-0 fa fa-chevron-right"></i>AMD
-                                                <span
-                                                        class="float-right  badge badge-light round">{{ " " }}</span></a>
-                                            </li>
+                                                    <a href="/new_test/{{ links_for_cat.processors }}"
+                                                       class="list-group-item border-0 pt-0 pb-0 pl-0">
+
+                                                        {{ cat.title }}</a></h6>
+                                            </figcaption>
+                                            <ul class="list-unstyled list-lg">
 
 
-                                            <li><a href="#" class="list-group-item pt-0 pb-0"><i class="icon-action pr-0 fa fa-chevron-right"></i> INTEL
-                                                <span
-                                                        class="float-right badge badge-light round">{{ " " }}</span></a>
-                                            </li>
+                                                <div class=" ml-3">
+
+                                                    <li>
+
+                                                        {% for i in  uniques %}
+                                                            {% if i %}
+                                                                {% with cat.title|lower|for_human_reading:"categories" as ssss %}
+                                                                    <form action="{{ ssss }}/" id method="post">
+                                                                        {% csrf_token %}
+                                                                        <input name="from_main" value="true" hidden>
+                                                                        <input name="manufacturer" checked hidden
+                                                                               type="checkbox" value="{{ i }}">
+                                                                        <button type="submit"
+                                                                                class="btn btn-link border-0 b-inline text-left container-fluid pt-0 pb-0">
+                                                                            <i class="icon-action pr-0 fa fa-chevron-right"></i>{{ i }}
+                                                                        </button>
+
+                                                                    </form>
+                                                                {% endwith %}
+                                                            {% endif %}
+                                                        {% endfor %}
+
+                                                    </li>
+                                                    {#                                                {% endfor %}#}
+
+                                                </div>
+
+                                            </ul>
                                         </div>
+                                    </figure> <!-- card // -->
 
 
-
-                                </ul>
-                                <figcaption class="info-wrap text-left">
-                                    <h6 class="title text-truncate"><a href="">Все процессоры</a></h6>
-                                </figcaption>
-                                       </div>
-                            </figure> <!-- card // -->
-
-
-                        </div> <!-- col // -->
-                        <div class="col-md-3">
-                            <figure class="card card-sm card-product">
-                                                           {#                                <span class="badge-new"> NEW </span>#}
-                                <div class="img-wrap"><img src="images/items/3.jpg"></div>
-                                 <div class="list-group list-group-flush">
-                                <figcaption class="info-wrap text-left">
-                                    <h6 class="title text-truncate"><a href="/new_test/{{ links_for_cat.motheboard }}"  class="list-group-item pt-0 pb-0 pl-0">Материнские платы</a></h6>
-                                </figcaption>
-                                <ul class="list-unstyled list-lg pt-0">
-
-                                        <div class=" ml-3">
-
-                                            <li><a href="#" class="list-group-item pt-0 pb-0"><i class="icon-action pr-0 fa fa-chevron-right"></i>Совместимые с AMD
-                                                <span
-                                                        class="float-right  badge badge-light round">{{ " " }}</span></a>
-                                            </li>
-
-
-                                            <li><a href="#" class="list-group-item pt-0 pb-0"><i class="icon-action pr-0 fa fa-chevron-right"></i> Совместимые с INTEL
-                                                <span
-                                                        class="float-right badge badge-light round">{{ " " }}</span></a>
-                                            </li>
-                                        </div>
-
-
-
-                                </ul>
-                                <figcaption class="info-wrap text-left">
-                                    <h6 class="title text-break"><a href="">Все материнские платы</a></h6>
-                                </figcaption>
-                                       </div>
-                            </figure> <!-- card // -->
-                        </div> <!-- col // -->
-                        <div class="col-md-3">
-                            <figure class="card card-sm card-product">
-                                      {#                                <span class="badge-new"> NEW </span>#}
-                                <div class="img-wrap"><img src="images/items/3.jpg"></div>
-                                 <div class="list-group list-group-flush">
-                                <figcaption class="info-wrap text-left">
-                                    <h6 class="title text-truncate"><a href="#"  class="list-group-item pt-0 pb-0 pl-0">Видеокарты</a></h6>
-                                </figcaption>
-                                <ul class="list-unstyled list-lg pt-0">
-
-                                        <div class=" ml-3">
-
-                                            <li><a href="#" class="list-group-item pt-0 pb-0"><i class="icon-action pr-0 fa fa-chevron-right"></i> AMD/ATI Radeon
-                                                <span
-                                                        class="float-right  badge badge-light round">{{ " " }}</span></a>
-                                            </li>
-
-
-                                            <li><a href="#" class="list-group-item pt-0 pb-0"><i class="icon-action pr-0 fa fa-chevron-right"></i> nVidia GeForce
-                                                <span
-                                                        class="float-right badge badge-light round">{{ " " }}</span></a>
-                                            </li>
-                                        </div>
-
-
-
-                                </ul>
-                                <figcaption class="info-wrap text-left">
-                                    <h6 class="title text-break"><a href="#">Все видеокарты</a></h6>
-                                </figcaption>
-                                       </div>
-                            </figure> <!-- card // -->
-                        </div> <!-- col // -->
-                                                <div class="col-md-3">
-                            <figure class="card card-sm card-product">
-                                      {#                                <span class="badge-new"> NEW </span>#}
-                                <div class="img-wrap"><img src="images/items/3.jpg"></div>
-                                 <div class="list-group list-group-flush">
-                                <figcaption class="info-wrap text-left">
-                                    <h6 class="title text-truncate"><a href="#"  class="list-group-item pt-0 pb-0 pl-0">Оперативная память</a></h6>
-                                </figcaption>
-                                <ul class="list-unstyled list-lg pt-0">
-
-                                        <div class=" ml-3">
-
-                                            <li><a href="#" class="list-group-item pt-0 pb-0"><i class="icon-action pr-0 fa fa-chevron-right"></i> Для настольных ПК
-                                                <span
-                                                        class="float-right  badge badge-light round">{{ " " }}</span></a>
-                                            </li>
-
-
-                                            <li><a href="#" class="list-group-item pt-0 pb-0"><i class="icon-action pr-0 fa fa-chevron-right"></i> Для ноутубков
-                                                <span
-                                                        class="float-right badge badge-light round">{{ " " }}</span></a>
-                                            </li>
-
-                                            <li><a href="#" class="list-group-item pt-0 pb-0"><i class="icon-action pr-0 fa fa-chevron-right"></i> Для серверов
-                                                <span
-                                                        class="float-right badge badge-light round">{{ " " }}</span></a>
-                                            </li>
-                                        </div>
-
-
-
-                                </ul>
-                                <figcaption class="info-wrap text-left">
-                                    <h6 class="title text-break"><a href="#">Вся память</a></h6>
-                                </figcaption>
-                                       </div>
-                            </figure> <!-- card // -->
-                        </div> <!-- col // -->
-                    </div> <!-- row.// -->
-
-
-
-
-
-                    <div class="row">
-                        <div class="col-md-3">
-                            <figure class="card card-sm card-product">
-                                {#                                <span class="badge-new"> NEW </span>#}
-                                <div class="img-wrap"><img src="images/items/3.jpg"></div>
-                                 <div class="list-group list-group-flush">
-                                <figcaption class="info-wrap text-left">
-                                    <h6 class="title text-truncate"><a href="#"  class="list-group-item pt-0 pb-0 pl-0">Жесткие диски</a></h6>
-                                </figcaption>
-                                <ul class="list-unstyled list-lg">
-
-                                        <div class=" ml-3">
-
-                                            <li><a href="#" class="list-group-item pt-0 pb-0"><i class="icon-action pr-0 fa fa-chevron-right"></i>Для настольных ПК
-                                                <span
-                                                        class="float-right  badge badge-light round">{{ " " }}</span></a>
-                                            </li>
-
-
-                                            <li><a href="#" class="list-group-item pt-0 pb-0"><i class="icon-action pr-0 fa fa-chevron-right"></i> Для ноутбуков
-                                                <span
-                                                        class="float-right badge badge-light round">{{ " " }}</span></a>
-                                            </li>
-
-
-                                            <li><a href="#" class="list-group-item pt-0 pb-0"><i class="icon-action pr-0 fa fa-chevron-right"></i> Внешние жесткие диски
-                                                <span
-                                                        class="float-right badge badge-light round">{{ " " }}</span></a>
-                                            </li>
-
-                                        </div>
-
-
-
-                                </ul>
-                                <figcaption class="info-wrap text-left">
-                                    <h6 class="title text-truncate"><a href="/new_test/processor/">Все процессоры</a></h6>
-                                </figcaption>
-                                       </div>
-                            </figure> <!-- card // -->
-
-
-                        </div> <!-- col // -->
-                        <div class="col-md-3">
-                            <figure class="card card-sm card-product">
-                                                           {#                                <span class="badge-new"> NEW </span>#}
-                                <div class="img-wrap"><img src="images/items/3.jpg"></div>
-                                 <div class="list-group list-group-flush">
-                                <figcaption class="info-wrap text-left">
-                                    <h6 class="title text-truncate"><a href="#"  class="list-group-item pt-0 pb-0 pl-0">Материнские платы</a></h6>
-                                </figcaption>
-                                <ul class="list-unstyled list-lg pt-0">
-
-                                        <div class=" ml-3">
-
-                                            <li><a href="#" class="list-group-item pt-0 pb-0"><i class="icon-action pr-0 fa fa-chevron-right"></i>Совместимые с AMD
-                                                <span
-                                                        class="float-right  badge badge-light round">{{ " " }}</span></a>
-                                            </li>
-
-
-                                            <li><a href="#" class="list-group-item pt-0 pb-0"><i class="icon-action pr-0 fa fa-chevron-right"></i> Совместимые с INTEL
-                                                <span
-                                                        class="float-right badge badge-light round">{{ " " }}</span></a>
-                                            </li>
-                                        </div>
-
-
-
-                                </ul>
-                                <figcaption class="info-wrap text-left">
-                                    <h6 class="title text-break"><a href="#">Все материнские платы</a></h6>
-                                </figcaption>
-                                       </div>
-                            </figure> <!-- card // -->
-                        </div> <!-- col // -->
-                        <div class="col-md-3">
-                            <figure class="card card-sm card-product">
-                                      {#                                <span class="badge-new"> NEW </span>#}
-                                <div class="img-wrap"><img src="images/items/3.jpg"></div>
-                                 <div class="list-group list-group-flush">
-                                <figcaption class="info-wrap text-left">
-                                    <h6 class="title text-truncate"><a href="#"  class="list-group-item pt-0 pb-0 pl-0">Видеокарты</a></h6>
-                                </figcaption>
-                                <ul class="list-unstyled list-lg pt-0">
-
-                                        <div class=" ml-3">
-
-                                            <li><a href="#" class="list-group-item pt-0 pb-0"><i class="icon-action pr-0 fa fa-chevron-right"></i> AMD/ATI Radeon
-                                                <span
-                                                        class="float-right  badge badge-light round">{{ " " }}</span></a>
-                                            </li>
-
-
-                                            <li><a href="#" class="list-group-item pt-0 pb-0"><i class="icon-action pr-0 fa fa-chevron-right"></i> nVidia GeForce
-                                                <span
-                                                        class="float-right badge badge-light round">{{ " " }}</span></a>
-                                            </li>
-                                        </div>
-
-
-
-                                </ul>
-                                <figcaption class="info-wrap text-left">
-                                    <h6 class="title text-break"><a href="#">Все видеокарты</a></h6>
-                                </figcaption>
-                                       </div>
-                            </figure> <!-- card // -->
-                        </div> <!-- col // -->
-                                                <div class="col-md-3">
-                            <figure class="card card-sm card-product">
-                                      {#                                <span class="badge-new"> NEW </span>#}
-                                <div class="img-wrap"><img src="images/items/3.jpg"></div>
-                                 <div class="list-group list-group-flush">
-                                <figcaption class="info-wrap text-left">
-                                    <h6 class="title text-truncate"><a href="#"  class="list-group-item pt-0 pb-0 pl-0">Оперативная память</a></h6>
-                                </figcaption>
-                                <ul class="list-unstyled list-lg pt-0">
-
-                                        <div class=" ml-3">
-
-                                            <li><a href="#" class="list-group-item pt-0 pb-0"><i class="icon-action pr-0 fa fa-chevron-right"></i> Для настольных ПК
-                                                <span
-                                                        class="float-right  badge badge-light round">{{ " " }}</span></a>
-                                            </li>
-
-
-                                            <li><a href="#" class="list-group-item pt-0 pb-0"><i class="icon-action pr-0 fa fa-chevron-right"></i> Для ноутубков
-                                                <span
-                                                        class="float-right badge badge-light round">{{ " " }}</span></a>
-                                            </li>
-
-                                            <li><a href="#" class="list-group-item pt-0 pb-0"><i class="icon-action pr-0 fa fa-chevron-right"></i> Для серверов
-                                                <span
-                                                        class="float-right badge badge-light round">{{ " " }}</span></a>
-                                            </li>
-                                        </div>
-
-
-
-                                </ul>
-                                <figcaption class="info-wrap text-left">
-                                    <h6 class="title text-break"><a href="#">Вся память</a></h6>
-                                </figcaption>
-                                       </div>
-                            </figure> <!-- card // -->
-                        </div> <!-- col // -->
-                    </div> <!-- row.// -->
+                                </div> <!-- col // -->
+                            {% endif %}
+                        {% endfor %}
 
 
                 </main> <!-- col.// -->

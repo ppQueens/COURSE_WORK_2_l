@@ -1,0 +1,112 @@
+{% extends "some_category_page.html" %}
+
+{% block page_title %}
+    {{ self_item.title }} /
+    {{ title_detail }}
+{% endblock %}
+
+{% load django_bootstrap_breadcrumbs %}
+{##}
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb self_item "item.views.item" category item_slug %}
+{% endblock %}
+
+
+{% block content %}
+    {% block script %}
+        {{ block.super}}
+        {% endblock %}
+    <div class="container">
+        <script>
+
+            function some_about_item(some, url) {
+                $(document).on("click", "a[href='#" + some + "']", function (event) {
+                    $(event.target).parent().children(".my-active").removeClass("my-active");
+                    $(event.target).addClass("my-active");
+
+                    var data = {"csrfmiddlewaretoken": csrftoken, "item_slug": "{{item_slug}}"};
+                    send_with_ajax(data, url, function (response) {
+                        $(".i-content-info").html(response);
+                    });
+
+
+                });
+            }
+
+            some_about_item("item_details", "{% url "item:details" %}");
+            some_about_item("item_main", "{% url "item:item_main" category item_slug %}");
+
+
+            $(document).on("click", ".show-comments", function (event) {
+                {#                event.preventDefault();#}
+                console.log("click on .show-comments");
+                $(event.target).parent().children(".my-active").removeClass("my-active");
+                $(event.target).addClass("my-active");
+
+
+                send_with_ajax("", "/comments/show/" + $(event.target).data("href"), function (response) {
+
+                    $(".i-content-info").html(response);
+                }, "GET");
+            });
+
+
+            $(document).on("click", ".delivery-info", function (event) {
+                $(event.target).parent().children(".my-active").removeClass("my-active");
+                $(event.target).addClass("my-active");
+
+                $(".i-content-info").html("<h5>Подробная информация о доставке товара</h5>");
+            });
+
+            $(document).on("click", ".warranty-info", function (event) {
+                $(event.target).parent().children(".my-active").removeClass("my-active");
+                $(event.target).addClass("my-active");
+
+                $(".i-content-info").html("<h5>Подробная информация о гарантии на товар</h5>");
+
+            });
+
+            $(document).on("click", ".pay-info", function (event) {
+                $(event.target).parent().children(".my-active").removeClass("my-active");
+                $(event.target).addClass("my-active");
+
+                $(".i-content-info").html("<h5>Подробная информация о способах оплаты товара</h5>");
+
+            });
+
+            $(window).load(function () {
+                s = location.search;
+                var href = location.href;
+                var new_url = href.substring(0, href.indexOf('?'));
+                window.history.pushState("", "", new_url);
+                if (s != '') {
+                    console.log(new_url);
+                    var split = s.split('?');
+                    var cat = split[1];
+                    console.log(cat);
+                    $('.show-' + cat).click();
+                }
+            });
+        </script>
+
+
+        <div class="card card-item mb-3 item-nav">
+
+            <nav class="nav nav-pills nav-justified pl-1 pb-1" style="font-size: 14px;">
+                <a id="unit-{{ id }}" class="nav-link my-active" href="#item_main">Все о товаре</a>
+                <a id="details-{{ id }}" class="nav-link" href="#item_details">Характеристики</a>
+                <a class="nav-link show-comments" href="#comments" data-href="{{ item_slug }}">Отзывы</a>
+                <a id="delivery-{{ id }}" class="nav-link delivery-info" href="#">Доставка</a>
+                <a id="delivery-{{ id }}" class="nav-link warranty-info" href="#">Гарантия</a>
+                <a id="delivery-{{ id }}" class="nav-link pay-info" href="#">Оплата</a>
+            </nav>
+
+        </div>
+        <div class="i-content-info">
+            {% include "item_content.html" %}
+
+        </div>
+    </div>
+    {#        {% include "comments.html" %}#}
+{% endblock %}

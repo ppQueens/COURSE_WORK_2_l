@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
     dependencies = [
         ('item', '0001_initial'),
         ('customer', '0001_initial'),
-        ('status', '0001_initial'),
+        # ('status', '0001_initial'),
     ]
 
     operations = [
@@ -23,7 +23,7 @@ class Migration(migrations.Migration):
                 ('cart_id', models.AutoField(primary_key=True, serialize=False, unique=True)),
                 ('created', models.DateTimeField(auto_now_add=True)),
                 ('last_add', models.DateTimeField(auto_now_add=True)),
-                ('cart_status', models.ForeignKey(default=None, on_delete=django.db.models.deletion.CASCADE, to='status.Status')),
+                # ('cart_status', models.ForeignKey(default=None, on_delete=django.db.models.deletion.CASCADE, to='status.Status')),
                 ('customer', models.OneToOneField(default=None, on_delete=django.db.models.deletion.CASCADE, to='customer.Customer')),
             ],
             options={

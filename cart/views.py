@@ -4,7 +4,6 @@ from item.models import Item
 from .cart import Cart
 from .forms import CartAddItemForm
 from django.core.serializers import serialize
-from order.models import DeliveryService
 from django.http import HttpResponse
 
 

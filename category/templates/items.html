@@ -1,44 +1,77 @@
 {% load static %}
 
+{% if no_items %}
+
+    <h5 class="center pt-5 text-secondary font-italic">{{ no_items }}</h5>
+
+{% else %}
 {% for i in items.items %}
+
+    {% block script %}
+        <script>
+            $(document).on("click", "#buy-" + "{{ i.slug }}", function (event) {
+                event.preventDefault();
+                send_with_ajax($("#item-{{ i.slug }}").serializeArray(), "{% url 'cart:cart_add_item' i.slug %}", function (response) {
+                    var $container = jQuery(".cart-content");
+
+                    $container.html(response);
+                    $("#cartModal").modal();
+
+                });
+
+            });
+        </script>
+    {% endblock %}
     <div class="col-sm-3">
         <figure class="card card-product">
-        <a href="{{ i.get_absolute_url }}" class="img-wrap">
-            <img src="{% static i.main_image %}">
-        </a>
-        <div class="mysd">
-            <figcaption class="info-wrap">
-                <a href="{{ i.get_absolute_url }}" class="title">{{ i.title }}</a>
-                <p class="desc">Краткое описание
-                   </p>
-                {% if i.item_quantity == 0 %}
-                <p class="badge badge-dark">Нет в наличии</p>
-                {% endif %}
-                <div class="rating-wrap">
-                    <ul class="rating-stars">
-                        <li style="width:80%" class="stars-active">
-                            <i class="fa fa-star"></i><i class="fa fa-star"></i><i
-                                class="fa fa-star"></i><i class="fa fa-star"></i><i
-                                class="fa fa-star"></i>
-                        </li>
-                        <li>
-                            <i class="fa fa-star"></i><i class="fa fa-star"></i><i
-                                class="fa fa-star"></i><i class="fa fa-star"></i><i
-                                class="fa fa-star"></i>
-                        </li>
-                    </ul>
-                    <div class="label-rating"> Отзывы (0)</div>
-{#                    <div class="label-rating">154 orders</div>#}
-                </div> <!-- rating-wrap.// -->
-            </figcaption>
-            <div class=" bottom-wrap">
-                <a href="" class="btn btn-sm btn-primary float-right">В корзину</a>
-                <div class="price-wrap h5">
-                    <span class="price-new">{{ i.item_price |floatformat:0 }} грн.</span>
-                    {#                                        <del class="price-old">$1980</del>#}
-                </div> <!-- price-wrap.// -->
-            </div> <!-- bottom-wrap.// -->
-        </div>
-        </figure>
+            <a href="{{ i.get_absolute_url }}" class="img-wrap">
+                <img src="{% static i.main_image %}">
+            </a>
+            <div class="mysd">
+                <figcaption class="info-wrap">
+                    <a href="{{ i.get_absolute_url }}" class="title">{{ i.title }}</a>
+                    <p class="desc">Краткое описание
+                    </p>
+                    {% if i.item_quantity == 0 %}
+                        <p class="badge badge-dark">Нет в наличии</p>
+                    {% endif %}
+{#                    <div class="rating-wrap">#}
+{#                        <ul class="rating-stars">#}
+{#                            <li style="width:80%" class="stars-active">#}
+{#                                <i class="fa fa-star"></i><i class="fa fa-star"></i><i#}
+{#                                    class="fa fa-star"></i><i class="fa fa-star"></i><i#}
+{#                                    class="fa fa-star"></i>#}
+{#                            </li>#}
+{#                            <li>#}
+{#                                <i class="fa fa-star"></i><i class="fa fa-star"></i><i#}
+{#                                    class="fa fa-star"></i><i class="fa fa-star"></i><i#}
+{#                                    class="fa fa-star"></i>#}
+{#                            </li>#}
+{#                        </ul>#}
+{#                        <a id="url" href="{{ i.get_absolute_url }}?comments">#}
+{#                            <div class="label-rating"> Отзывы ({{ i.comments.all|length }})</div>#}
+{#                        </a>#}
+{#                    </div> <!-- rating-wrap.// -->#}
+                </figcaption>
+                <div class="bottom-wrap">
+
+                    <button href="#" id="buy-{{ i.slug }}" form="item-{{ i.slug }}"
+                            class="btn btn-sm float-right  btn-success  ml-4"> В корзину
+                    </button>
+                    <div class="form">
+                        {#                       #}
+                        <form id="item-{{ i.slug }}" action="{% url "cart:cart_add_item" i.slug %}"
+                              method="POST">{% csrf_token %}
+                            <input type="hidden" name="quantity" min="1" value="1">
+                            <input type="hidden" name="update" value="True">
+                        </form>
+                        <div class="price-wrap h5">
+                            <span class="price-new">{{ i.item_price |floatformat:0 }} грн.</span>
+                            {#                                        <del class="price-old">$1980</del>#}
+                        </div> <!-- price-wrap.// -->
+                    </div> <!-- bottom-wrap.// -->
+                </div>
+            </div> </figure>
     </div> <!-- col // -->
 {% endfor %}
+{% endif %}

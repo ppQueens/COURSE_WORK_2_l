@@ -4,6 +4,13 @@ from st_app.models import CommonFields
 from django.urls import reverse
 from transliterate import translit
 from django.db.models.signals import post_save
+from django.db import transaction
+import os
+
+
+
+def get_image_path(instance,filename):
+    return os.path.join('category/static/photos', "_".join(filename.split()))
 
 
 class Category(MPTTModel, CommonFields):
@@ -11,12 +18,13 @@ class Category(MPTTModel, CommonFields):
         db_table = "Category"
         verbose_name_plural = "Category"
 
-
-    url_field = models.CharField(max_length=100,blank=False, default=None)
-    parent = TreeForeignKey('self', null=True, blank=True, related_name='children',on_delete=models.CASCADE)
+    url_field = models.CharField(max_length=100, blank=False, default=None)
+    parent = TreeForeignKey('self', null=True, blank=True, related_name='children', on_delete=models.CASCADE)
     cat_create_date = models.DateTimeField(auto_now_add=True, null=True)
     cat_update_date = models.DateTimeField(auto_now=True)
-   # filters = models.BooleanField(default=None)
+    main_page_filters = models.CharField(max_length=100, blank=True, default=None)
+    cats_image = models.ImageField(upload_to=get_image_path, blank=True, default=None)
+
 
     class MPTTMeta:
         level_attr = 'mptt_level'
@@ -28,20 +36,13 @@ class Category(MPTTModel, CommonFields):
     def get_absolute_url(self):
         return reverse('category:show_cats', args=[self.url_field])
 
+@transaction.atomic()
+def static_url(sender, instance, **kwargs):
+    print(kwargs)
+    # if kwargs["created"]:
+    print(str(instance.cats_image))
+    instance.cats_image = str(instance.cats_image).split("/", 2)[2]
+    post_save.disconnect(static_url,sender=Category)
+    instance.save(force_update=True)
 
-#
-# def toggle_filter_state(sender, instance, **kwargs):
-#     order = instance.order
-#
-#     #filter = instance.Category.objeect
-#     all_order_items = OrderItem.objects.filter(order=order)
-#
-#     total_price = 0
-#     for orderItem in all_order_items:
-#         total_price += orderItem.item.item_price * orderItem.quantity
-#
-#     order.total_price = total_price
-#     order.save(force_update=True)
-#
-# #pre_save.co
-# post_save.connect(toggle_filter_state, sender=Category)
+post_save.connect(static_url, sender=Category)

@@ -1,4 +1,3 @@
-{% include "my_js.html" %}
 {% load get_by_key replace  %}
 
         {% for title, values in aside.dict_key_value.items %}
@@ -22,9 +21,9 @@
                                             <li>
                                                 {#                                                    <form method="post"> {% csrf_token %}#}
                                                 <input id="{{ filter }}"  type="checkbox"
-                                                       class="styled" unchecked>
+                                                       class="styled" >
                                                 {#                                                        </form>#}
-                                                <label for="{{ filter }}">
+                                                <label class="h6" for="{{ filter }}">
                                                     {{ aside.dict_secret_human|get_by_key:filter|capfirst }}
                                                 </label>
 

@@ -1,34 +1,29 @@
-<div class="card card-filter">
+<div class="form-group p-0 mb-0 col-sm-3  ml-5">
+<div class="card small">
     <article class="card-group-item">
-        <header class="card-header">
-            <a class="" aria-expanded="true" href="#" data-toggle="collapse"
-               data-target="#collapse88">
-                <i class="icon-action fa fa-chevron-down"></i>
-                <span class="title">Цена</span>
-            </a>
-        </header>
-        <div style="" class="filter-content collapse show" id="collapse88">
-            <div class="card-body">
+        <div style="" class="filter-content text-center show" id="collapse88">
+            <label class="m-0 p-0 ">Цена</label>
+            <div class="card-body pt-0">
 
-
-                <ul class="list-unstyled list-lg">
+                <ul class="list-unstyled list-lg mt-0">
                     <div class="list-group list-group-flush">
 
+                          <div class="row slider-labels mt-0 pb-2 justify-content-between">
+                            <div class="col-xs-12 caption">
+                                <strong></strong> <span id="slider-range-value1"></span>
+                            </div>
+                            <div class="col-xs-12 text-right caption">
+                                <strong></strong> <span id="slider-range-value2"></span>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-sm-12">
                                 <div id="slider-range"></div>
                             </div>
                         </div>
-                        <div class="row slider-labels">
-                            <div class="col-xs-12 offset-1  caption">
-                                <strong></strong> <span id="slider-range-value1"></span> грн.
-                            </div>
-                            <div class="col-xs-12 offset-5 text-right caption">
-                                <strong></strong> <span id="slider-range-value2"></span> грн.
-                            </div>
-                        </div>
-                        <div class="form-row mt-3">
-                            {#                                                <div class="col-sm-12">#}
+
+                        <div class="form-row mt-3" hidden>
+                                                                            <div class="col-sm-12">
                             <div class="form-group col-md-5 offset-1">
                                 <input type="number" id="min-value" class="form-control"
                                        min="{{ min_price }}" max="{{ max_price }}" name="min-value"
@@ -39,7 +34,7 @@
                                        min="{{ min_price }}" max="{{ max_price }}" name="max-value"
                                        value="">
                             </div>
-                            {#                                                </div>#}
+                                                                            </div>
                         </div>
                     </div>
                 </ul>
@@ -48,3 +43,4 @@
     </article> <!-- card-group-item.// -->
 
 </div> <!-- card.// -->
+</div>
