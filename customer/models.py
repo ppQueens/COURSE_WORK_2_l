@@ -16,7 +16,7 @@ class BaseAccount(models.Model):
     customer = models.OneToOneField(User, related_name="customer", on_delete=models.CASCADE, primary_key=True)
     customer_type = models.IntegerField(blank=True, null=True, choices=ACCOUNT_TYPES)
     fl_name = models.CharField(max_length=100, blank=True, null=True)
-    phone = models.CharField(max_length=100,blank=True, null=True)
+    phone = models.CharField(max_length=14,blank=True, null=True)
 
     def __str__(self):
         return "{}".format(self.customer)

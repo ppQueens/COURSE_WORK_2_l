@@ -1,10 +1,19 @@
 {% extends "main.html" %}
+{% load django_bootstrap_breadcrumbs  static %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb "Оформление заказа" "" %}
+
+{% endblock %}
+
 {% block content %}
     <script>
 
         $(document).on("click", ".btn-nxt", function (event) {
             event.preventDefault();
-            $(".first").attr("hidden", true);
+            {#$(".first").attr("hidden", true);#}
+            $(".first-info").attr("hidden", true);
             $(".prev").attr("hidden", false);
             $(".second").attr("hidden", false);
             $(".btn-nxt").attr("hidden", true);
@@ -12,7 +21,7 @@
         });
         $(document).on("click", ".prev", function () {
             $(".second").attr("hidden", true);
-            $(".first").attr("hidden", false);
+            $(".first-info").attr("hidden", false);
             $(this).attr("hidden", true);
             $(".btn-nxt").attr("hidden", false);
         });
@@ -33,19 +42,25 @@
                 delete data_k_v["city"];
                 data_k_v["delivery_address"] = address;
             }
-            send_with_ajax(data_k_v,"{% url "order:make_order" %}",function (e) {
-                $(".container").html(e);
+            else{
+                var address = data_k_v["point_address"] + ", " + data_k_v["city"];
+                delete data_k_v["point_address"];
+                delete data_k_v["city"];
+                data_k_v["delivery_address"] = address;
+            }
+            send_with_ajax(data_k_v, "{% url "order:make_order" %}", function (e) {
+                $(".item-content").html('<div class="container">'+e+'</div>');
             })
 
         });
 
         function handleChange(checkbox) {
-            var t = ["delivery_1", "delivery_2", "delivery_3"];
+            var t = ["delivery_novaya_pochta"];
             if (checkbox.checked) {
                 $("." + $(checkbox).attr("id") + ":lt(2)").attr("hidden", false);
 
                 $.each(t, function (key, val) {
-                    if (val != $(checkbox).attr("id") && !$("#" + val).is(":checked")) {
+                    if (val !== $(checkbox).attr("id") && !$("#" + val).is(":checked")) {
                         $("." + val).attr("hidden", true);
                         $("." + val + " :input").attr("disabled", true);
                         $(":input", "." + val).val("");
@@ -86,29 +101,30 @@
         }
     </style>
     <div class="container">
+        <h4 class="mb-5">Оформление заказа</h4>
         <div class="row justify-content-center">
-            <div class="col-md-5 checkout">
-                <h4 class="mb-5">Оформление заказа</h4>
+            <div class="col-md-4 checkout">
                 <button type="button" hidden class="prev btn btn-link">Редактирова личные данные</button>
 
-                <form id="checker" action="{% url "order:make_order" %}" class="needs-validation check-done" method="post" novalidate>{% csrf_token %}
+                <form id="checker" action="{% url "order:make_order" %}" class="needs-validation check-done"
+                      method="post" novalidate>{% csrf_token %}
 
-                    <div class="first">
-                        <div class="col-md-8">
-                            {#                    <div class="row">#}
-                            {#                        <div class="col-md-6 mb-3">#}
+                    <div class="first-info">
+                        <div class="col-md-10">
                             <label for="firstName">Имя и фамилия</label>
-                            <input type="text" class="form-control" id="firstName" name="customer" value="{% if user.is_authenticated %}{{ user.customer.fl_name }}{% endif %}" required>
+                            <input type="text" class="form-control" id="firstName" name="customer"
+                                   value="{% if user.is_authenticated %}{{ user.customer.fl_name }}{% endif %}"
+                                   required>
                             <div class="invalid-feedback">
                                 Valid first name is required.
                             </div>
-                            {#                        </div>#}
 
-                            {#                    </div>#}
                             <div class="mt-4">
                                 {#                        <div class="col-md-6 mb-3">#}
                                 <label for="firstName">Мобильный телефон</label>
-                                <input type="text" class="form-control" id="firstName" name="phone" value="{% if user.is_authenticated %}{{ user.customer.phone }}{% endif %}" required>
+                                <input type="text" class="form-control" id="firstName" name="phone"
+                                       value="{% if user.is_authenticated %}{{ user.customer.phone }}{% endif %}"
+                                       required>
                                 <div class="invalid-feedback">
                                     Valid first name is required.
                                     {#                            </div>#}
@@ -120,7 +136,8 @@
 
                                 <label for="email">Email <span class="text-muted">(Optional)</span></label>
                                 <input type="email" class="form-control" id="email" name="email"
-                                       placeholder="you@example.com" value="{% if user.is_authenticated %}{{ user.email }}{% endif %}" >
+                                       placeholder="you@example.com"
+                                       value="{% if user.is_authenticated %}{{ user.email }}{% endif %}">
                                 <div class="invalid-feedback">
                                     Please enter a valid email address for shipping updates.
                                 </div>
@@ -145,114 +162,80 @@
                     </div>
                     <div class="second" hidden>
                         <h5>Выбор способа доставки и оплаты</h5>
-                        {% for item in cart %}
-                            <li class="list-group-item lh-condensed">
-
-                                <div class="row">
-                                    <div class="col-md-2">
-                                        <img height="100" width="100"
-                                             src="../../{{ item.item.itemimage_set.get.image }}">
-                                    </div>
-                                    <div class="col-md-10 text-right">
-                                        <h6 class="my-0 f h5">{{ item.item.title }}</h6>
-                                        <span class="text-primary h6">{{ item.item.item_price|floatformat:"0" }} грн.</span>
-                                        <br>
-                                        <span class="text-success h6">{{ item.quantity }} шт.</span>
-                                    </div>
-
-                                </div>
-
-                            </li>
-                            <hr class="mb-4">
-                        {% endfor %}
-
-                        <hr class="mb-4">
 
 
                         <h4 class="mb-3">Доставка</h4>
 
                         <div class="d-block my-3">
-                            {% for i in delivery %}
-                                <div class="custom-control custom-radio">
-                                    <input id="delivery_{{ i.id }}" onchange='handleChange(this)'
-                                           name="delivery_service" value="{{ i.id }}"
-                                           type="radio" class="custom-control-input" required>
-                                    <div class="invalid-feedback">
-                                        Выберите способ доставки
-                                    </div>
-                                    <label class="custom-control-label" for="delivery_{{ i.id }}">{{ i.title }}</label>
-                                    <div class="pl-3 pt-3 delivery_{{ i.id }}" hidden>
-                                        <ul class="nav nav-pills nav-fill">
-                                            {% if i.to_door %}
-                                                <li class="nav-item">
-                                                    <a class="nav-link active to_door"
-                                                       href="delivery_{{ i.id }} to_door"
-                                                       onclick='select_delivery_kind(event)'>Курьер</a>
-                                                </li>
-                                            {% endif %}
-                                            {% if i.to_pickUp_point %}
-                                                <li class="nav-item ">
-                                                    <a class="nav-link to_pickup_point"
-                                                       href="delivery_{{ i.id }} to_pickup_point"
-                                                       onclick='select_delivery_kind(event)'>Самовызов с отделений</a>
-                                                </li>
-                                            {% endif %}
+                            <div class="custom-control custom-radio">
+                                <input id="delivery_novaya_pochta"  onchange='handleChange(this)'
+                                       name="delivery_service" value="delivery_novaya_pochta"
+                                       type="radio" class="custom-control-input" required>
+                                <div class="invalid-feedback">
+                                    Выберите способ доставки
+                                </div>
+                                <label class="custom-control-label" for="delivery_novaya_pochta">Новая почта</label>
+                                <div class="pl-3 pt-3 delivery_novaya_pochta" hidden>
+                                    <ul class="nav nav-pills nav-fill">
+                                        <li class="nav-item ">
+                                            <a class="nav-link to_pickup_point"
+                                               href="delivery_novaya_pochta to_pickup_point"
+                                               onclick='select_delivery_kind(event)'>Самовызов с отделений</a>
+                                        </li>
+                                        <li class="nav-item ">
+                                            <a class="nav-link to_door"
+                                               href="delivery_novaya_pochta to_door"
+                                               onclick='select_delivery_kind(event)'>Доставка курьером</a>
+                                        </li>
 
-                                        </ul>
-                                        <hr class="mb-4">
-                                    </div>
+                                    </ul>
+                                    <hr class="mb-4">
+                                </div>
 
-                                    {% if i.to_door %}
+                                <div class="p-3 delivery_novaya_pochta to_door" hidden>
 
-
-                                        <div class="p-3 delivery_{{ i.id }} to_door" hidden>
-
-                                            <div class="row">
-                                                <div class="col-md-6 input-group-sm  mb-3">
-                                                    <input type="text" class="form-control" placeholder=""
-                                                           name="street" required>
-                                                    <small class="text-muted">Улица</small>
-                                                    <div class="invalid-feedback">
-                                                        Введите название улицы
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-3 input-group-sm  mb-3">
-                                                    <input type="text" class="form-control" name="house" placeholder=""
-                                                           required>
-                                                    <small class="text-muted">Дом</small>
-                                                    <div class="invalid-feedback">
-                                                        Ввидите название дома
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-3 input-group-sm  mb-3">
-                                                    <input type="text" class="form-control" name="apartment"
-                                                           placeholder=""
-                                                           required>
-                                                    <small class="text-muted">Квартира</small>
-                                                    <div class="invalid-feedback">
-                                                        Введите номер квартиры
-                                                    </div>
-                                                </div>
+                                    <div class="row">
+                                        <div class="col-md-6 input-group-sm  mb-3">
+                                            <input type="text" class="form-control" placeholder=""
+                                                   name="street" required>
+                                            <small class="text-muted">Улица</small>
+                                            <div class="invalid-feedback">
+                                                Введите название улицы
                                             </div>
                                         </div>
-                                    {% endif %}
-                                    {% if i.to_pickUp_point %}
-                                        <div class="row p-3 delivery_{{ i.id }} to_pickup_point" hidden>
-                                            <div class="col-md-6 input-group-sm  mb-3">
-                                                <input type="text" class="form-control" name="point_address"
-                                                       disabled placeholder="">
-                                                <small class="text-muted">Отделение</small>
-                                                <div class="invalid-feedback">
-                                                    Name on card is required
-                                                </div>
+                                        <div class="col-md-3 input-group-sm  mb-3">
+                                            <input type="text" class="form-control" name="house" placeholder=""
+                                                   required>
+                                            <small class="text-muted">Дом</small>
+                                            <div class="invalid-feedback">
+                                                Ввидите название дома
                                             </div>
-
-
                                         </div>
-                                    {% endif %}
+                                        <div class="col-md-3 input-group-sm  mb-3">
+                                            <input type="text" class="form-control" name="apartment"
+                                                   placeholder=""
+                                                   required>
+                                            <small class="text-muted">Квартира</small>
+                                            <div class="invalid-feedback">
+                                                Введите номер квартиры
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row p-3 delivery_novaya_pochta to_pickup_point" hidden>
+                                    <div class="col-md-6 input-group-sm  mb-3">
+                                        <input type="text" class="form-control" name="point_address"
+                                               disabled placeholder="">
+                                        <small class="text-muted">Отделение</small>
+                                        <div class="invalid-feedback">
+                                            Name on card is required
+                                        </div>
+                                    </div>
+
 
                                 </div>
-                            {% endfor %}
+
+                            </div>
 
                         </div>
 
@@ -263,16 +246,19 @@
 
                         <div class="d-block my-3">
                             <div class="custom-control custom-radio">
-                                <input id="credit" name="payment_method" type="radio" class="custom-control-input"
+                                <input id="creditCart" name="payment_method" value="creditCart" type="radio"
+                                       class="custom-control-input"
 
                                        required>
-                                <label class="custom-control-label" for="credit">Visa/MasterCard</label>
+                                <label class="custom-control-label" for="creditCart">Visa/MasterCard</label>
                             </div>
                             <div class="custom-control custom-radio">
-                                <input id="debit" name="payment_method" type="radio" class="custom-control-input"
+                                <input id="cash" name="payment_method" value="cash" type="radio"
+                                       class="custom-control-input"
                                        required>
-                                <label class="custom-control-label" for="debit">Наличными</label>
+                                <label class="custom-control-label" for="cash">Наличными</label>
                             </div>
+
 
                         </div>
 
@@ -286,65 +272,74 @@
             </div>
 
 
-            <div class="col-md-3 card mt-5 mb-4 h-25">
+            <div class="col-md-4 h-25">
+                {##}
+                {#                                            <div class="col-md-2">#}
+                {#                                        <img height="60" width="60"#}
+                {#                                             src="{% static item.item.main_image %}">#}
+                {#                                    </div>#}
+                {#                                    <div class="col-md-10 text-right">#}
+                {#                                        <h6 class="my-0 f h6">{{ item.item.title }}</h6>#}
+                {#                                        <span class="text-primary h6">{{ item.item.item_price|floatformat:"0" }} грн.</span>#}
+                {#                                        <br>#}
+                {#                                        <span class="text-success h6">{{ item.quantity }} шт.</span>#}
+                {#                                    </div>#}
+
+
+                <div class="first">
+                    <div class="list-group mb-3 ">
+                        {% for item in cart %}
+                            <div class="list-group-item d-flex justify-content-between">
+                                <div class="col-md-2 d-inline">
+                                    <img height="60" width="60"
+                                         src="{% static item.item.main_image %}">
+                                </div>
+                                <div class="">
+                                    <h6 class="my-0">{{ item.item.title }}</h6>
+                                    <small class="text-muted"></small>
+
+                                </div>
+
+
+                                <div>
+                                    <div class="text-success">{{ item.item.item_price|floatformat }}</div>
+                                    <span class="text-success  h6">{{ item.quantity }} шт.</span>
+                                </div>
+                                {#                           #}
+                            </div>
+
+                        {% endfor %}
+
+                        <div
+                                class="list-group-item d-flex justify-content-between">
+                            <span>Всего (грн)</span>
+                            <strong>{{ cart.get_total_price|floatformat:0 }}</strong>
+                        </div>
+                    </div>
+                </div>
                 <div class="second" hidden>
-
-                    <ul class="list-group mb-3 ">
-
-                        <li class="list-group-item card-title">
-
-                            <h6 class="pt-4 float-left">{{ cart|length }} товар на
-                                сумму</h6>
-                            <h6 class="pt-4 float-right"> {{ cart.get_total_price|floatformat:0 }} грн. </h6>
-                        </li>
-                        <li style="list-style-type:none">
-                            <hr class="">
-                        </li>
-                        <li class="list-group-item">
-                            <h6 class="card-title float-left">Cумма заказа:</h6>
-                            <h5 class="card-title  float-right">{{ cart.get_total_price|floatformat:0 }} грн. </h5>
-
-                        </li>
-
-                    </ul>
+                    {##}
+                    {#                    <ul class="list-group mb-3 ">#}
+                    {##}
+                    {#                        <li class="list-group-item card-title">#}
+                    {##}
+                    {#                            <h6 class="pt-4 float-left">{{ cart|length }} товар на#}
+                    {#                                сумму</h6>#}
+                    {#                            <h6 class="pt-4 float-right"> {{ cart.get_total_price|floatformat:0 }} грн. </h6>#}
+                    {#                        </li>#}
+                    {#                        <li style="list-style-type:none">#}
+                    {#                            <hr class="">#}
+                    {#                        </li>#}
+                    {#                        <li class="list-group-item">#}
+                    {#                            <h6 class="card-title float-left">Cумма заказа:</h6>#}
+                    {#                            <h5 class="card-title  float-right">{{ cart.get_total_price|floatformat:0 }} грн. </h5>#}
+                    {##}
+                    {#                        </li>#}
+                    {##}
+                    {#                    </ul>#}
                     <div class="text-center pb-3">
                         <button type="submit" form="checker" class="btn btn-success w-75">Сделать заказ</button>
                     </div>
-                </div>
-                <div class="first">
-                    <ul class="list-group mb-3 ">
-                        {% for item in cart %}
-                            <li class="list-group-item d-flex justify-content-between lh-condensed">
-                                <div>
-                                    <h6 class="my-0">{{ item.item.title }}</h6>
-                                    <small class="text-muted">Brief description</small>
-                                </div>
-                                <span class="text-muted">{{ item.item.item_price|floatformat:0 }}</span>
-                            </li>
-                        {% endfor %}
-
-                        <li class="list-group-item">
-                            <hr class="mb-2">
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between">
-                            <span>Всего (грн)</span>
-                            <strong></strong>
-                            <strong></strong>
-                            <strong></strong>
-                            <strong></strong>
-                            <strong></strong>
-                            <strong></strong>
-                            <strong></strong>
-                            <strong></strong>
-                            <strong></strong>
-                            <strong></strong>
-                            <strong></strong>
-                            <strong></strong>
-                            <strong></strong>
-                            <strong></strong>
-                            <strong>{{ cart.get_total_price|floatformat:0 }}</strong>
-                        </li>
-                    </ul>
                 </div>
             </div>
 

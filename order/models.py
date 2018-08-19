@@ -16,7 +16,7 @@ class Order(models.Model):
         ("sent", "SENT"),
         ("canceled", "CENCELED"),
         ("need clarification", "NEED CLARIFICATION"),
-        ("fulfilled", "FULFILLED")
+        ("fulfilled", "FULFILLED ")
     )
 
     class Meta:
@@ -28,7 +28,7 @@ class Order(models.Model):
 
     order_id = models.AutoField(unique=True, primary_key=True)
     customer = models.ForeignKey(Customer, default=None, null=True, on_delete=models.SET_NULL)
-    status = models.CharField(max_length=14, choices=status_choice, default=status_choice[0])
+    status = models.CharField(max_length=14, choices=status_choice, default=status_choice[0][0])
     create_date = models.DateTimeField(auto_now_add=True, null=True)
     update_date = models.DateTimeField(auto_now=True)
     delivery_service = models.CharField(max_length=100, default=None, null=True, blank=True)

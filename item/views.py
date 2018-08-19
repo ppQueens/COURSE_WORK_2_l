@@ -20,10 +20,11 @@ def item(request, category, item_slug):
     title = translates_word.reversed_categories[category]
     self_item = Item.objects.filter(item_category__title=title).get(slug=item_slug)
     title_detail = ItemField.objects.filter(item__id=self_item.id,title__use_for="title").values_list("value__field_value")
+    title_detail = " / ".join(i[0] for i in title_detail)
     #
     # for image in self_item.itemimage_set.all():
     #     print(type(str(image.image)))
-    title_detail = " / ".join(i[0] for i in title_detail)
+
     # values_list(
     #     "item_field__value__field_value", "item_field__value__field_type")
 

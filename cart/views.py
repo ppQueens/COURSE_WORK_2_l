@@ -4,7 +4,7 @@ from item.models import Item
 from .cart import Cart
 from .forms import CartAddItemForm
 from django.core.serializers import serialize
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 
 
 @require_POST
@@ -21,7 +21,6 @@ def cart_add_item(request, item_slug):
 
     return redirect("cart:show_cart")
 
-#TODO: индекс по slug
 @require_POST
 def cart_remove_item(request, item_slug):
     print(request.POST)
@@ -40,6 +39,7 @@ def show_cart(request):
 
 def check_out_line(request):
     cart = Cart(request)
-    delivery = DeliveryService.objects.all()
-    return render(request, 'сheckout.html',
-                  {'cart': cart, "delivery": delivery})
+    if not len(cart):
+        return HttpResponseRedirect("/new_test")
+
+    return render(request, 'сheckout.html',locals())

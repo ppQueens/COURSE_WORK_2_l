@@ -1,12 +1,13 @@
 <article class="card-body">
     <a href="/account/register" class="float-right btn btn-outline-primary">Регистрация</a>
     <h4 class="card-title mb-4 mt-1">Вход в кабинет</h4>
-    <div role="button" class="from-server" data-toggle="popover" data-placement="top"></div>
+
 
     <form method="post" action="/account/login/" id="login_form">{% csrf_token %}
         <div class="form-group">
             <label>Почта или номер телефона</label>
             <input name="username" class="form-control" placeholder="Email" required>
+            {{ popover_place|safe }}
         </div> <!-- form-group// -->
         <div class="form-group">
             <a class="float-right" href="#">Забыли пароль?</a>

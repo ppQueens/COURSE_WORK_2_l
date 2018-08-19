@@ -12,5 +12,7 @@ urlpatterns = [
             views.activate, name='activate'),
     path("profile/", views.user_profile, name="user_profile"),
     path("profile/order_history/", views.user_order_history, name="order_history"),
+    path("profile/comment_history/", views.user_comment_history, name="comment_history"),
+    path("profile/personal_info/", views.user_pesonal_info, name="personal_info"),
 
 ]

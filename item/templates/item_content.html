@@ -3,6 +3,18 @@
 
 <script>
 
+
+    $(document).on("click", "#buy-" + "{{ item_slug }}", function (event) {
+        event.preventDefault();
+        send_with_ajax($("#item-{{ item_slug }}").serializeArray(), "{% url 'cart:cart_add_item' item_slug %}", function (response) {
+            var $container = jQuery(".cart-content");
+
+            $container.html(response);
+            $("#cartModal").modal();
+
+        });
+
+    });
 </script>
 
 

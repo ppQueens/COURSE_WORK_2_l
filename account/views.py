@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .forms import LoginForm, UserRegistrationForm
+from .forms import LoginForm, UserRegistrationForm, PersonalInfoChange
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.views.decorators.http import require_POST
@@ -16,29 +16,38 @@ from django.contrib.auth.decorators import login_required
 from customer.models import Customer
 from django.contrib.auth.hashers import make_password
 from order.models import Order
+from django.db.models import Q
+from comment.models import Comment
+
 account_activation_token = TokenGenerator()
 
 
-@require_POST
+# @require_POST
+
 def user_login(request):
-    print(request.POST)
-    # if request.method == "POST":
-    form = LoginForm(request.POST)
-    if form.is_valid():
-        clean = form.cleaned_data
-        user = authenticate(request, username=clean["username"], password=clean["password"])
+    if request.user.is_authenticated:
+        return HttpResponseRedirect("/new_test")
+    if request.method == "POST":
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            clean = form.cleaned_data
+            user = authenticate(request, username=clean["username"], password=clean["password"])
 
-        if user is not None:
-            if user.is_active:
-                login(request, user)
-                customer = Customer.objects.filter(customer=user).get()
-                return render(request, "account/user_anon.html", {"user": user})
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
+                    customer = Customer.objects.filter(customer=user).get()
+                    return render(request, "account/user_anon.html", {"user": user})
+                else:
+                    return HttpResponse("Disabled account", content_type='text')
+
             else:
-                return HttpResponse("Disabled account", content_type='text')
-
-        else:
-            return HttpResponse("Неверный логин или пароль", content_type='text')
-            # return HttpResponse("")
+                return HttpResponse("Неверный логин или пароль", content_type='text')
+                # return HttpResponse("")
+    if request.GET.get("login") == "bar":
+        popover_place = '<div role="button" class="from-server d-block" data-toggle="popover" data-placement="right"></div>'
+        return render(request, "account/login_form.html", locals())
+    return render(request, "account/login_page.html", {})
 
 
 def user_logout(request):
@@ -109,11 +118,9 @@ def activate(request, uidb64, token):
     else:
         return HttpResponse('Activation link is invalid!')
 
+
 @login_required(login_url="/account/login")
 def user_profile(request):
-
-
-
     return render(request, "profile.html", locals())
 
 
@@ -121,4 +128,46 @@ def user_profile(request):
 def user_order_history(request):
     orders = Order.objects.filter(customer__customer_id=request.user.id)
 
-    return render(request, "order_history.html",locals())
+    return render(request, "order_history.html", locals())
+
+
+@login_required(login_url="/account/login")
+def user_comment_history(request):
+    comments = Comment.objects.filter(Q(phone_email=request.user.email) | Q(phone_email=request.user.customer.phone))
+    one_item__oneOrMore_comment = dict()
+
+    for comment in comments:
+        if not one_item__oneOrMore_comment.get(comment.item):
+            one_item__oneOrMore_comment[comment.item] = [comment]
+        else:
+            one_item__oneOrMore_comment[comment.item].append(comment)
+
+    print(one_item__oneOrMore_comment)
+    return render(request, "comment_history.html", locals())
+
+
+@login_required(login_url="/account/login")
+def user_pesonal_info(request):
+    print(make_password('mariadontberude'))
+    if request.method == "POST":
+        change_form = PersonalInfoChange(request.POST, user=request.user)
+        if change_form.is_valid():
+            update_user = request.user
+            update_user.email = change_form.cleaned_data["email"]
+            print(change_form.cleaned_data["phone"])
+            update_user.customer.phone = change_form.cleaned_data["phone"]
+            if change_form.cleaned_data["new_pass"]:
+                update_user.password = make_password(change_form.cleaned_data["new_pass"])
+            update_user.customer.save()
+            update_user.save()
+            # if not change_form.cleaned_data["new_pass"]:
+            #     logout(request)
+            return HttpResponseRedirect("/account/profile/personal_info")
+            # return render(request,"personal_info.html",locals())
+
+
+    else:
+        change_form = PersonalInfoChange()
+    user = request.user
+    print(change_form.errors)
+    return render(request, "personal_info.html", locals())

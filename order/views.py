@@ -2,17 +2,12 @@ from django.shortcuts import render
 from cart.cart import Cart
 from .models import OrderItem, Order
 from .forms import OrderCreateForm
-from django.contrib.auth.models import User
 from django.db import transaction
-from django.http import HttpResponseRedirect
-from django.views.decorators.http import require_POST
+from customer.models import Customer
 # Create your views here.
 
 @transaction.atomic()
 def make_order(request):
-    #get delivery service from request
-    #
-    delivery = ""
     if request.POST:
         cart = Cart(request)
 
@@ -21,29 +16,25 @@ def make_order(request):
         form = OrderCreateForm(rp)
 
         if form.is_valid():
-            print("IS_VALID")
-            order = Order.objects.create(customer=User.objects.get(email__iexact=rp.get("email")),
-                                         delivery_service=delivery,
+            print("IS_VALID_+++")
+            order = Order.objects.create(customer=Customer.objects.get(customer__email=rp.get("email")),
+                                         delivery_service=rp.get("delivery_service"),
                                          delivery_address=rp.get("delivery_address"),
                                          payment_method=rp.get("payment_method")
                                          )
             for item in cart:
-                OrderItem.objects.create(order=order,
-                                        item=item['item'],
-                                        price=item['price'],
-                                        quantity=item['quantity'])
+                OrderItem.objects.create(order=order, item=item['item'], quantity=item['quantity'])
             cart.clear()
-            return render(request,
-                          'created.html',
-                          {'order': order})
+            return render(request,'created.html')
         else:
             print("IS NOT VALID")
+            print(form.errors)
         # else:
         #     return HttpResponseRedirect("/new_test")
         # for item in cart:
         #     print(item['item'].itemimage_set.get())
-            return render(request, 'сheckout.html',
-                          {'cart': cart, 'form': form, "delivery":delivery})
+            return render(request, 'checkout_form.html',
+                          {'cart': cart, 'form': form})
     return render(request,"404.html")
 
 

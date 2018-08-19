@@ -2,27 +2,6 @@
 
     <div class="icontext">
 
-{#        <div class="icon-wrap"><i#}
-{#                class="icon-sm round border border-primary text-primary fa fa-user"></i></div>#}
-{#        <div class="text-wrap dropdown">#}
-{#            <small>Welcome <b>{{ user.customer.fl_name|capfirst }}</b></small>#}
-{#            <a href="#" class="b" data-toggle="dropdown" data-offset="20,10" aria-expanded="false">#}
-{#                My account <i class="fa fa-caret-down"></i>#}
-{#            </a>#}
-{#            <div class="dropdown-menu dropdown-menu-right"#}
-{#                 style="min-width: 250px; position: absolute; transform: translate3d(-123px, 47px, 0px); top: 0px; left: 0px; will-change: transform;"#}
-{#                 x-placement="bottom-end">#}
-                {#                {% if user.is_authenticated %}#}
-{#                <div class="col-sm-2 pl-2"><a id="logout" href="/account/logout/">Выход</a></div>#}
-{##}
-                {#                {% endif %}#}
-{##}
-{#            </div> <!--  dropdown-menu .// -->#}
-            {#            <div class="col-sm-2 pl-2"><a id="showCart" href="{% url "cart:show_cart" %}" data-toggle="modal"#}
-            {#            >Корзина</a></div>#}
-{##}
-{#        </div> <!-- text-wrap.// -->#}
-
         <div class="text-wrap dropdown">
 
             <a href="#" class="ml-3 icontext" data-toggle="dropdown" data-offset="20,10"
@@ -33,16 +12,12 @@
                     <span><b>{{ user.customer.fl_name|capfirst }}</b> <i class="fa fa-caret-down"></i></span>
                 </div>
             </a>
-{#            <a class="nav-link b" data-toggle="dropdown" data-offset="20,10" aria-expanded="false"#}
-{#               href="#">#}
-{#                Вход в личный кабинет#}
-{#            </a>#}
             <div class="dropdown-menu dropdown-menu-right "
                  style="min-width: 200px; position: absolute;">
 
                  <div class=" pl-2"><a id="logout" href=".">Выход</a></div>
                  <div class=" pl-2"><a href="/account/profile">Мой аккаунт</a></div>
-{#                {% include "account/login.html" %}#}
+{#                {% include "account/login_form.html" %}#}
             </div> <!--  dropdown-menu .// -->
         </div> <!-- text-wrap.// -->
     </div> <!-- icontext.// -->
@@ -57,11 +32,21 @@
 
     </script>
 {% else %}
-{#    <li class="nav-item">#}
+<script>
 
+$(document).on("click",".log-in",function (event) {
+    event.preventDefault();
+    console.log("hello");
+    send_with_ajax({"login":"bar"},"/account/login",function (response) {
+        $(".log-in-form").html(response);
+    },"GET");
+})
+
+
+</script>
         <div class="text-wrap dropdown">
 
-            <a href="#" class="ml-3 icontext" data-toggle="dropdown" data-offset="20,10"
+            <a href="#" class="ml-3 icontext log-in" data-toggle="dropdown" data-offset="20,10"
                aria-expanded="false">
                 <div class="icon-wrap icon-xs bg2 round text-secondary"><i class="fa fa-user"></i></div>
                 <div class="text-wrap">
@@ -69,15 +54,11 @@
                     <span>Войти <i class="fa fa-caret-down"></i></span>
                 </div>
             </a>
-{#            <a class="nav-link b" data-toggle="dropdown" data-offset="20,10" aria-expanded="false"#}
-{#               href="#">#}
-{#                Вход в личный кабинет#}
-{#            </a>#}
-            <div class="dropdown-menu dropdown-menu-right "
-                 style="min-width: 300px; position: absolute;">
 
-                {% include "account/login.html" %}
+            <div class="dropdown-menu dropdown-menu-right log-in-form"
+                style="min-width: 300px; position: absolute;" >
+
+{#                {% include "account/login_form.html" %}#}
             </div> <!--  dropdown-menu .// -->
         </div> <!-- text-wrap.// -->
-{#    </li>#}
 {% endif %}

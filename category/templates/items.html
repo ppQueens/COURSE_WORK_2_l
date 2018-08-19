@@ -1,13 +1,13 @@
 {% load static %}
 
+
 {% if no_items %}
 
     <h5 class="center pt-5 text-secondary font-italic">{{ no_items }}</h5>
 
 {% else %}
 {% for i in items.items %}
-
-    {% block script %}
+{% block script %}
         <script>
             $(document).on("click", "#buy-" + "{{ i.slug }}", function (event) {
                 event.preventDefault();
